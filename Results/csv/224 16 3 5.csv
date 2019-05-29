@@ -1,0 +1,21 @@
+Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
+"Memcpy HtoD [sync]",102748022,46084,,,,,,,,,,200704,4355177501,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",102971017,44996,,,,,,,,,,200704,4460485376,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",103019437,155341,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [sync]",103176603,39331,,,,,,,,,,200704,5102946784,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",103480788,39684,,,,,,,,,,200704,5057554681,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",103678021,40195,,,,,,,,,,200704,4993257867,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",103721673,144652,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [sync]",103868149,39460,,,,,,,,,,200704,5086264571,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",104169135,39683,,,,,,,,,,200704,5057682130,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",104358111,40195,,,,,,,,,,200704,4993257867,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",104401762,145421,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [sync]",104548975,37027,,,,,,,,,,200704,5420476949,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",104837863,40196,,,,,,,,,,200704,4993133645,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",105038744,40772,,,,,,,,,,200704,4922593937,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",105082972,148205,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [sync]",105233001,37027,,,,,,,,,,200704,5420476949,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",105515041,40131,,,,,,,,,,200704,5001221001,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",105703025,39619,,,,,,,,,,200704,5065852242,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",105746100,148557,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [sync]",105896513,37027,,,,,,,,,,200704,5420476949,,,,,,,,,,,,,,,,,

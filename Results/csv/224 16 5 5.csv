@@ -1,0 +1,21 @@
+Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
+"Memcpy HtoD [async]",88753070,62053,,,,,,,,,,200704,3234396403,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",88815347,91976,,,,,,,,,,200704,2182134469,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",88907547,646967,,,,,,,,,,200704,310222932,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",89399365,154317,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy HtoD [async]",89556178,58213,,,,,,,,,,200704,3447752220,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",89614615,101769,,,,,,,,,,200704,1972152620,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",89716608,163374,,,,,,,,,,200704,1228494130,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",89730049,146348,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy HtoD [async]",89881646,58533,,,,,,,,,,200704,3428903353,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",89940403,86567,,,,,,,,,,200704,2318481638,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [async]",90027194,189904,,,,,,,,,,200704,1056870840,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",90058749,152429,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",90216938,146669,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy HtoD [async]",90218763,57508,,,,,,,,,,200704,3490018779,,,,,,,,,,,,,,,,,
+"Memcpy DtoH [async]",90308050,70822,,,,,,,,,,200704,2833921662,,,,,,,,,,,,,,,,,
+"Memcpy DtoH [async]",90379832,166094,,,,,,,,,,200704,1208375979,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",90391993,148717,14,14,1,16,16,1,13,2084,0,,,0,0,352,0,0,0,0,9856,0,1408,9856,0,0,0,9856,0,0
+"Memcpy DtoH [async]",90548263,39395,,,,,,,,,,200704,5094656682,,,,,,,,,,,,,,,,,
+"Memcpy DtoH [async]",90588522,66502,,,,,,,,,,200704,3018014495,,,,,,,,,,,,,,,,,
+"Memcpy DtoH [async]",90655920,67590,,,,,,,,,,200704,2969433348,,,,,,,,,,,,,,,,,

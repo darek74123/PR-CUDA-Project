@@ -1,0 +1,264 @@
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 10
+Performance: 188.856 GFlop/s
+Time: 148.783 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 10
+Performance: 7.10579 GFlop/s
+Time: 3954.32 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 10
+Performance: 120.871 GFlop/s
+Time: 232.467 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 10
+Performance: 20.803 GFlop/s
+Time: 1350.69 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 10
+Performance: 101.203 GFlop/s
+Time: 277.647 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 10
+Performance: 5.31213 GFlop/s
+Time: 5289.51 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 10
+Performance: 78.4005 GFlop/s
+Time: 358.398 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 10
+Performance: 14.0357 GFlop/s
+Time: 2001.94 msec
+Size: 2.80986e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 5
+Performance: 183.432 GFlop/s
+Time: 76.5913 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 5
+Performance: 11.6302 GFlop/s
+Time: 1208 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 5
+Performance: 121.827 GFlop/s
+Time: 115.322 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 5
+Performance: 22.6078 GFlop/s
+Time: 621.436 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 5
+Performance: 96.9903 GFlop/s
+Time: 144.852 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 5
+Performance: 8.4461 GFlop/s
+Time: 1663.4 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 5
+Performance: 79.0934 GFlop/s
+Time: 177.629 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 5
+Performance: 11.4837 GFlop/s
+Time: 1223.41 msec
+Size: 1.40493e+010 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 1
+Performance: 151.619 GFlop/s
+Time: 18.5323 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 5
+nMatrices: 1
+Performance: 22.2837 GFlop/s
+Time: 126.094 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 1
+Performance: 123.367 GFlop/s
+Time: 22.7764 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 16
+Code version: 3
+nMatrices: 1
+Performance: 24.5262 GFlop/s
+Time: 114.565 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 1
+Performance: 88.8463 GFlop/s
+Time: 31.626 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 5
+nMatrices: 1
+Performance: 14.5388 GFlop/s
+Time: 193.266 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 1
+Performance: 77.2643 GFlop/s
+Time: 36.3668 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------
+--------------------------START--------------------------------
+Matrix size: 1120
+Block size: 8
+Code version: 3
+nMatrices: 1
+Performance: 15.2832 GFlop/s
+Time: 183.853 msec
+Size: 2.80986e+009 Ops
+
+Status: SUCCESS
+---------------------------END---------------------------------

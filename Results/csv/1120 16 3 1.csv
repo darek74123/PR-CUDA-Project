@@ -1,0 +1,5 @@
+Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
+"Memcpy HtoD [sync]",105789992,1745968,,,,,,,,,,5017600,2873821284,,,,,,,,,,,,,,,,,
+"Memcpy HtoD [sync]",108165452,1692909,,,,,,,,,,5017600,2963892329,,,,,,,,,,,,,,,,,
+"void matrixMulCUDA<int=16>(float*, float*, float*, int, int)",109861817,14393384,70,70,1,16,16,1,13,2084,0,,,0,0,8720,0,0,0,0,1220800,0,34880,1220800,0,0,0,1220800,0,0
+"Memcpy DtoH [sync]",124256993,3022202,,,,,,,,,,5017600,1660246403,,,,,,,,,,,,,,,,,
