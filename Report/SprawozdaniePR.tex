@@ -1,0 +1,165 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{pslatex} %z tym czcionka wygląda ładniej
+
+\usepackage{xcolor}
+\definecolor{CodeListingColor}{rgb}{0.95,0.95,0.95}
+\usepackage{minted}
+
+\usepackage{xpatch}
+\xpretocmd{\inputminted}{\par\vspace{-1em}}{}{}
+\xapptocmd{\inputminted}{\par\vspace{-1em}}{}{}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usepackage{amsfonts}
+\usepackage{csvsimple}
+%
+\usepackage{adjustbox}
+\usepackage{enumitem}
+
+\setlength\parindent{0pt} %żeby wcięć przed akapitem nie było
+
+%\author{
+%  Ewa Fengler 132219
+%  \and
+%  Dariusz Grynia 132235
+%  \and
+%  gr. I1, wt. godz. 15.10, tyg. parzyste
+%}
+\date{}
+\title{Przetwarzanie równoległe \\ \Large Projekt 1 OpenMP}
+
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm, headsep=1.2cm]{geometry}
+\usepackage[figurename=Rys.]{caption}
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+\usepackage{float}
+%\usepackage{etoolbox}
+%\makeatletter
+%\patchcmd{\Ginclude@eps}{"#1"}{#1}{}{}
+%\makeatother
+
+\linespread{1.1}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1cm}
+\section{Wstęp}
+
+\subsection{Autorzy}
+Ewa Fengler 132219
+
+Dariusz Grynia 132235
+
+grupa I1,\\
+wtorki godz. 15.10,\\
+tygodnie parzyste\\
+
+\subsection{Adres kontaktowy}
+dariusz.grynia@student.put.poznan.pl\\
+
+\subsection{Temat zadania}
+Ukrycie kosztów transferu danych w czasie obliczeń.\\
+\\
+Porównanie wersji kodu:
+\begin{itemize}
+\item [3.] grid wieloblokowy, obliczenia przy wykorzystaniu pamięci współdzielonej bloku wątków
+\item [5.] grid wieloblokowy, obliczenia przy wykorzystaniu pamięci współdzielonej bloku wątków, zrównoleglenie obliczeń i transferu danych między pamięciami: operacyjną procesora, a globalną karty
+\end{itemize}
+
+\subsection{Opis wykorzystanej karty graficznej}
+
+TODO
+
+\section{Analiza z przygotowania eksperymentu}
+
+\subsection{Mnożenie macierzy z wykorzystaniem karty graficznej}
+
+Mnożenie macierzy jest procesem kosztownym obliczeniowo i przez to czasochłonnym. Jednym z rozwiązań mających na celu skrócenie czasu przetwarzania jest podział pracy oraz zrównoleglenie obliczeń. W przypadku obliczeń z wykorzystaniem karty graficznej, w przeciwieństwie do obliczeń na procesorze wielordzeniowym ogólnego przeznaczenia, efektywne przetwarzanie wymaga dostosowania algorytmu mnożenia tak, aby wykorzystywał bardzo dużą liczbę wątków.
+
+Możenie macierzy polega obliczaniu jednej komórki macierzy wynikowej przez jeden wątek. Na pojedynczym multiprocesorze jednocześnie przetwarzane są wątki jednej wiązki. Wykonują one zawsze w danym momencie tę samą instrukcję, lecz na innych danych. Nie zawsze wątki są gotowe do obliczeń, np. w trakcie oczekiwania na dane. Wtedy sprzętowy moduł szeregujący wątki przełącza kontekst i następuje przetwarzanie gotowych wątków innej wiązki (z tego samego lub innego bloku wątków).
+
+W trakcie całego procesu mnożenia macierzy, wykorzystywanych jest $n^2$ wątków (n -- jeden wymiar macierzy kwadratowej). Wątki są pogrupowane w bloki, te natomiast składają się na strukturę zwaną gridem. Taka organizacja umożliwia z jednej strony efektywne szeregowanie obliczeń wykonywanych na karcie graficznej, z drugiej strony pozwala programiście kontrolować na rzecz jakich danych wątki wykonują instrukcje, poprzez wykorzystanie identyfikatorów bloków oraz wątków wewnątrz bloku np. do indeksowania tablic.
+
+\subsection{Dostęp do pamięci}
+
+Prędkość przetwarzania na procesorze ogólnego przeznaczenia w dużym stopniu zależała od efektywności dostępu do danych. Dostęp do pamięci operacyjnej cechował się stosunkowo dużym opóźnieniem, dlatego duże znaczenie miało efektywne wykorzystanie pamięci podręcznej.
+W przypadku karty graficznej, dane mogą być przechowywane w stosunkowo powolnej pamięci globalnej. Opóźnienia są w tym przypadku bardzo znaczące i wynoszą 200 cykli procesora. W celu zwiększenia efektywności przetwarzania, należy wykorzystać odpowiednio dużą liczbę wątków, tak aby zawsze jakaś wiązka była gotowa do obliczeń, podczas gdy inne czekają na dane. Niestety z powodu ograniczeń na maksymalną liczbę wątków na multiprocesor, nadal nie jest możliwe zapewnienie ciągłości obliczeń.
+
+W realizowanym temacie zostało wykorzystane inne podejście -- wykorzystanie pamięci współdzielonej, która jest znacznie szybsza od pamięci globalnej. Czas dostępu do danych znajdujących się w pamięci współdzielonej jest w przybliżeniu 100 razy krótszy niż w przypadku pamięci globalnej (pod warunkiem, że nie ma konfliktu dostępu do tych samych banków pamięci współdzielonej). Do danych znajdujących się w pamięci współdzielonej mają dostęp wszystkie wątki w ramach bloku. Zanim jednak będą mogły z nich korzystać, konieczne jest skopiowanie odpowiednich danych z pamięci globalnej do pamięci współdzielonej. W celu zwiększenia efektywności, dostępy do pamięci globalnej mogą być łączone w transakcje. Jednak aby było to możliwe, konieczne jest spełnienie następującego warunku: wątki w ramach pół-warpu muszą jednocześnie odwoływać się do sąsiednich adresów pamięci.
+
+
+\subsection{Kod}
+
+% set options once for all listings
+\setminted{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+	tabsize=2,
+	bgcolor=CodeListingColor,
+	%fontsize=\footnotesize,
+	breaklines,
+	linenos %Enables line numbers
+}
+
+\begin{listing}[H]
+\inputminted{cuda}{listings/kernel.cu}
+\caption{Kod kernela TODO podpis}
+\label{lst:kernel}
+\end{listing}
+
+\newpage
+Kod źródłowy przedstawiony na listingu \ref{lst:kernel} to funkcja -- kernel, uruchamiany na karcie graficznej. Początkowe linie (4 - 13) służą wyznaczeniu przechowywanych w rejestrach wartości, wykorzystywanych dalej do indeksowania oraz sterowania pętlą. Następnie ma miejsce deklaracja tymczasowej zmiennej akumulującej obliczane iloczyny odpowiednich elementów macierzy. Pętla obejmujące linie 16 - 32 służy iteracji po kolejnych blokach macierzy A i B. Jeden blok wątków oblicza jeden blok macierzy wynikowej, jednak potrzebuje kolejno wszystkich bloków macierzy źródłowych, w celu wyznaczenia pełnego wyniki (analogicznie do zewnętrznych pętli metody 6-pętlowej dla CPU).
+Linie 20-23 służą deklaracji oraz pobraniu danych z pamięci globalnej do pamięci współdzielonej. Wątki w ramach połowy warpu odwołują się do sąsiednich komórek macierzy (wartości tx są kolejnymi liczbami), co pozwala na efektywny, łączony dostęp do pamięci globalnej. W linii 24 ma miejsce synchronizacja wątków całego bloku. Jeśli w pamięci współdzielonej znajdowałby się tylko blok macierzy A, natomiast dane z macierzy B wątki odczytywałyby z pamięci synchronizacja byłaby zbędna, ponieważ każda wiązka korzystałaby tylko z danych, które sama wcześniej pobrała, a wszystkie wątki wiązki wykonują w danym czasie tą samą instrukcję (kod nie zawiera żadnych rozgałęzień a więc nie ma tutaj rozbieżności wątków). W przypadku macierzy B, wątki danej wiązki odczytują jednak również dane, które są wczytywane przez pozostałe wiązki (odczyt po kolumnie), zatem synchronizacja jest konieczna, ponieważ wszystkie wiązki muszą pobrać dane, zanim którakolwiek będzie mogła rozpocząć obliczenia. Synchronizacja jest konieczna, jednak do pewnego stopnia ogranicza wydajność, ponieważ nie mam możliwości jednoczesnego pobierania danych i wykonywania obliczeń przez różne wiązki bloku. Możliwa jest natomiast realizacja przetwarzania przez wątki z innych bloków, przydzielonych na dany multiprocesor, jednak ich liczba jest ograniczona, przez co karta graficzna może nie wykonywać obliczeń przez $100\%$ czasu.
+Następnie w linii 29 ma miejsce faktyczne mnożenie macierzy. Jeden wątek oblicza jeden wynik, wykorzystując wiersz bloku macierzy A oraz kolumnę bloku macierzy B. Dyrektywa \verb|#pragma unroll| powoduje rozwinięcie pętli, co pozwala wyeliminować narzut wydajnościowy, który wynikałby ze sprawdzania warunku oraz inkrementacji zmiennej sterującej.
+Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki, należące do wiązek, które skończyły już obliczenia, nie mogły pobierać nowych danych do pamięci współdzielonej, w czasie kiedy inne wiązki jeszcze wykorzystują zapisane wcześniej w tym miejscu dane do obliczeń. Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
+\\
+\textit{TODO to powyżej jakoś sensownie podzielić na akapity}
+
+\textbf{TODO opis obu wywołań}
+
+\textbf{TODO rysunki: przesyłanie sync/async}
+
+\textbf{rysunki z opisem określające:}
+\begin{itemize}
+\item miejsce dostępu i kolejność dostępu do danych realizowane przez poszczególne wątki, bloki
+\item wyznaczane przez wątki i bloki wartości wyników
+\end{itemize}
+
+\begin{listing}[H]
+\inputminted{cuda}{listings/invocation_sync.cu}
+\caption{Wywołanie sync TODO podpis}
+\label{lst:ijk}
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{cuda}{listings/invocation_async.cu}
+\caption{Wywołanie async TODO podpis}
+\label{lst:ijk}
+\end{listing}
+
+
+%\section{Eksperyment pomiarowy}
+%TODO
+%
+%\subsection{Instancje}
+%
+%TODO
+%
+%\subsection{Mierzone parametry}
+%
+%TODO
+%
+%\section{Wnioski}
+%
+%TODO
+
+\end{document}
