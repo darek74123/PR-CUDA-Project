@@ -242,4 +242,26 @@ obserwowanych wartości (czytelne odwołanie do omawianej wielkości - gdzie si�
 uruchomienia - system, parametry, wersja kodu – dotyczą).}\\
 -----------------------------------------
 
+\subsection{Dostęp do pamięci globalnej}
+
+Wartości miar \verb|gld| oraz \verb|gst| zebranych przez NVIDIA Visual Profiler wskazują, że zgodnie z przeprowadzoną wcześniej analizą, wszystkie dostępy do pamięci globalnej były łączone w transakcje. W przypadku bloków o rozmiarze 16~x~16 wszystkie dostępy (pobieranie danych oraz zapis wyników) były przeprowadzane w transakcjach 64 bajtowych (tylko wartości \verb|gld 64B| oraz \verb|gst 64B| są niezerowe). Oznacza to, że dostęp do pamięci globalnej był przeprowadzany w optymalny sposób (64B to 16 zmiennych typu float, czyli zawsze dostępy połowy wiązki były łączone w jedną transakcję).
+
+W przypadku wszystkich instancji gdzie bloki wątków miały rozmiar 8~x~8, tylko wartości \verb|gld 32B| oraz \verb|gst 32B| miały wartości niezerowe. Oznacza to, że żądania każdych ośmiu wątków wiązki były łączone w jedną transakcje. Jest to konsekwencją tego, że wątki jednego bloku pobierają lub zapisują dane do fragmentu 8~x~8 pełnej macierzy. Oznacza to, że tylko 8 komórek ma sąsiednie adresy (wiersz bloku), natomiast kolejne 8 wątków pobiera oddalone dane z następnego wiersza macierzy. Z tego powodu nie jest możliwe łączenie dostępów w transakcje 64 bajtowe.
+
+Dostęp do pamięci w przypadku wykorzystania bloków wątków 8~x~8 wciąż jest bardziej efektywny, niż w przypadku gdyby łączenie nie było w ogóle możliwe, jednak dla bloków 16~x~16 można uzyskać optymalną efektywność dostępów do pamięci globalnej. Dodatkowo, wykorzystanie mniejszych bloków pozwala osiągnąć zajętość multiprocesora równą maksymalnie 50\%. Z tego powodu, w przypadku chęci maksymalizacji efektywności przetwarzania wykorzystanie mniejszych bloków nie ma sensu.
+
+\subsection{Zajętość multiprocesora}
+
+W celu zapewnienia optymalnej efektywności przetwarzanie, należy maksymalizować zajętość wszystkich multiprocesorów karty. Dla instancji n~=~224 oraz n~=~1120 oraz obu rozważanych rozmiarów bloku wątków analiza zajętości została przeprowadzona już w punkcie 3.2. Dwie pozostałe instancje n~=~864 oraz n~=~1728, zostały wybrane, ponieważ umożliwiają osiągnięcie  100\% teoretycznej zajętości wszystkich multiprocesorów, w przypadku bloków 16~x~16. W przypadku mniejszych bloków, zajętość procesorów osiągnie 50\%, ograniczeniem jest tutaj limit 8 bloków na multiprocesor.
+
+W przypadku każdej testowanej instancji żądania zasobowe dotyczące liczby rejestrów oraz pamięci współdzielonej były na tyle małe, że nie stanowiły ograniczenia dla zajętości multiprocesorów.
+%TODO opisać tu dokładne wartości, jeśli uda się wykminić, jest takie wymaganie w opisie projektu
+
+\subsection{CGMA}
+
+CGMA (Compute to Global Memory Access ratio) jest współczynnikiem określającym intensywność obliczeń, to znaczy ile operacji arytmetycznych (w przypadku mnożenia macierzy będą to operacje dodawania i mnożenia) przypada na dostęp do danych w pamięci globalnej. W przypadku mnożenia macierzy z wykorzystaniem pamięci globalnej do przechowywania wielokrotnie wykorzystywanych bloków macierzy A i B, CGMA będzie równe rozmiarowi bloku (BS). Wynika to z faktu, że każdy wątek bloku pobiera do pamięci współdzielonej po jednej wartości z macierzy A oraz B. Następnie dany wątek w pętli wewnętrznej wykorzystuje jeden wiersz bloku macierzy A oraz jedną kolumnę bloku macierzy B, a zatem wykonuje dwie operacje arytmetyczne BS razy, samemu pobierając wcześniej z pamięci globalnej tylko 2 wartości.
+
+
+
+
 \end{document}
