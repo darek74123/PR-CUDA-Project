@@ -20,8 +20,27 @@
 \usepackage{csvsimple}
 %
 \usepackage{adjustbox}
-\usepackage{enumitem}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{enumitem}
+\makeatletter
+\newcommand{\mtmathitem}{%
+\xpatchcmd{\item}{\@inmatherr\item}{\relax\ifmmode$\fi}{}{\errmessage{Patching of \noexpand\item failed}}
+\xapptocmd{\@item}{$}{}{\errmessage{appending to \noexpand\@item failed}}}
+\makeatother
+
+\newenvironment{mathitem}[1][]{%
+\itemize[#1]\mtmathitem}{$\endlist}                    %$
+
+\newenvironment{mathenum}[1][]{%
+\enumerate[#1]\mtmathitem}{$\endlist}                  %$
+
+\newenvironment{mathdesc}[1][]{%
+\description[#1]\mtmathitem}{$\endlist}                %$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[compact]{titlesec}
+\titlespacing{\subsubsection}{0pt}{1em}{0em}
 \setlength\parindent{0pt} %żeby wcięć przed akapitem nie było
 \usepackage{parskip} %no need to use \\ to add empty line between paragraphs any more
 
@@ -51,7 +70,7 @@
 \maketitle
 \thispagestyle{empty}
 
-\vspace{-2cm}
+\vspace{-2cm} %TODO ustawić na ile będzie trzeba, kiedy już sprawko będzie miało całą zawartość
 \section{Wstęp}
 
 \subsection{Autorzy}
@@ -76,6 +95,9 @@ Porównanie wersji kodu:
 \subsection{Opis wykorzystanej karty graficznej}
 
 TODO
+
+\textit{opis wykorzystywanej karty graficznej (typ, CC – możliwości obliczeniowe, liczba SM i rdzeni, innych
+jednostek obliczeniowych, ograniczenia dla tego CC)}
 
 \section{Analiza z przygotowania eksperymentu}
 
@@ -121,15 +143,14 @@ Linie 20-23 służą deklaracji oraz pobraniu danych z pamięci globalnej do pam
 Następnie w linii 29 ma miejsce faktyczne mnożenie macierzy. Jeden wątek oblicza jeden wynik, wykorzystując wiersz bloku macierzy A oraz kolumnę bloku macierzy B. Dyrektywa \verb|#pragma unroll| powoduje rozwinięcie pętli, co pozwala wyeliminować narzut wydajnościowy, który wynikałby ze sprawdzania warunku oraz inkrementacji zmiennej sterującej.
 Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki, należące do wiązek, które skończyły już obliczenia, nie mogły pobierać nowych danych do pamięci współdzielonej, w czasie kiedy inne wiązki jeszcze wykorzystują zapisane wcześniej w tym miejscu dane do obliczeń. Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
 
-\textit{TODO to powyżej jakoś sensownie podzielić na akapity}\\
-\textbf{TODO opis obu wywołań}\\
+TODO to powyżej jakoś sensownie podzielić na akapity\\
 \textbf{TODO rysunki: przesyłanie sync/async}
 
-\textbf{rysunki z opisem określające:}
-\begin{itemize}
+\textit{\textbf{rysunki z opisem określające:}}
+\textit{\begin{itemize}
 \item miejsce dostępu i kolejność dostępu do danych realizowane przez poszczególne wątki, bloki
 \item wyznaczane przez wątki i bloki wartości wyników
-\end{itemize}
+\end{itemize}}
 
 \begin{listing}[H]
 \inputminted{cuda}{listings/invocation_sync.cu}
@@ -139,9 +160,9 @@ Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki, nal
 
 Listing 2 przedstawia wywołanie kernela dla wersji trzeciej kodu. Zmienna \verb|nStreams| określa w tym przypadku ile macierzy będzie obliczanych, jednak przesyłanie macierzy wejściowych do pamięci karty graficznej, obliczenia oraz kopiowanie wyników do pamięci operacyjnej następują sekwencyjnie, po zakończeniu poprzedniej operacji. Do przechowywania wskaźników do segmentów pamięci zawierających dane wszystkich przetwarzanych macierzy wykorzystano wektory \verb|h_A, h_B, h_C|, zawierające wskaźniki do pamięci operacyjnej oraz \verb|d_A, d_B, d_C|, zawierające wskaźniki do danych w pamięci karty graficznej. Pamięć na karcie graficznej została wcześniej zaalokowana z wykorzystaniem funkcji \verb|cudaMalloc|. Poprawność wywołania wszystkich funkcji była sprawdzana, jednak, w celu zwiększenia czytelności, listingi 2 i 3 zawierają jedynie niezbędny do opisu koncepcji kod. Pełna wersja kodu, dołączona do sprawozdania, zawiera wszystkie szczegóły.
 
-Na listingu 3 przedstawiono wywołanie kernela dla piątej wersji kodu, w której obliczenia na karcie graficznej zrównoleglono z przesyłaniem danych pomiędzy pamięcią karty a pamięcią operacyjną. W tym celu w liniach 1-4 zadeklarowano oraz zainicjowano strumienie, w liczbie równej liczbie obliczanych macierzy. Pamięć na karcie graficznej tutaj również zaalokowano wcześniej za pomocą funkcji \verb|cudaMalloc|, jednak w odróżnieniu od poprzedniej wersji, macierze znajdujące się w pamięci operacyjnej zaalokowano z wykorzystaniem funkcji \verb|cudaMallocHost|. Funkcja ta pozwala na alokację pamięci z wyłączonym stronicowaniem, co jest wymagane w przypadku asynchronicznych transferów wykonywanych przez funkcję \verb|cudaMemcpyAsync|. Kolejne pętle służą zakolejkowaniu operacji kopiowania danych do pamięci karty, wywołań kernela oraz kopiowania wyników do pamięci operacyjnej. Warto wspomnieć o każdorazowym przypisaniu danej operacji do strumienia, oraz o tym, że funkcje te są nieblokujące, oznaczają tylko zlecenie pewnej operacji, która jest wykonywana w tle. W ramach jednego strumienia operacje są oczywiście wykonywane sekwencyjnie, co gwarantuje, że dane wykorzystywane przez dany kernel zostaną przesłane przed jego uruchomieniem, natomiast wyniki zostaną przesłane do pamięci operacyjnej dopiero gdy przetwarzanie kernala się zakończy. Zysk wynikający ze zwrónoleglenia transferu danych będzie zatem widoczny w przypadku, gdy wykorzystany zostanie więcej niż jeden strumień.
+Na listingu 3 przedstawiono wywołanie kernela dla piątej wersji kodu, w której obliczenia na karcie graficznej zrównoleglono z przesyłaniem danych pomiędzy pamięcią karty a pamięcią operacyjną. W tym celu w liniach 1-4 zadeklarowano oraz zainicjowano strumienie, w liczbie równej liczbie obliczanych macierzy. Pamięć na karcie graficznej tutaj również zaalokowano wcześniej za pomocą funkcji \verb|cudaMalloc|, jednak w odróżnieniu od poprzedniej wersji, macierze znajdujące się w pamięci operacyjnej zaalokowano z wykorzystaniem funkcji \verb|cudaMallocHost|. Funkcja ta pozwala na alokację pamięci z wyłączonym stronicowaniem, co jest wymagane w przypadku asynchronicznych transferów wykonywanych przez funkcję \verb|cudaMemcpyAsync|. Kolejne pętle służą zakolejkowaniu operacji kopiowania danych do pamięci karty, wywołań kernela oraz kopiowania wyników do pamięci operacyjnej. Warto wspomnieć o każdorazowym przypisaniu danej operacji do strumienia, oraz o tym, że funkcje te są nieblokujące, oznaczają tylko zlecenie pewnej operacji, która jest wykonywana w tle. W ramach jednego strumienia operacje są oczywiście wykonywane sekwencyjnie, co gwarantuje, że dane wykorzystywane przez dany kernel zostaną przesłane przed jego uruchomieniem, natomiast wyniki zostaną przesłane do pamięci operacyjnej dopiero gdy przetwarzanie kernela się zakończy. Zysk wynikający ze zrównoleglenia transferu danych będzie zatem widoczny w przypadku, gdy wykorzystany zostanie więcej niż jeden strumień.
 
-W odróżnieniu od poprzedniej wersji, wykorzystano tutaj oddzielne pętle, służące do kolejkowania transferu danych oraz wywołań kernela. Ma to na celu zakolejkowanie najpierw wszystkich operacji przesyłania danych do karty, następnie wszystkich wywołań kerneli i na końcu wszystkich operacji kopiowania wyników obliczeń. W przypadku wykorzystania jednej pętli, wymienione operacje byłyby kolejkowane na przemian. Kolejność kolejkowania ma ogromne znaczenie w przypadku pracy z kartami graficznymi ze starszych generacji. W przypadku wykorzystywanej karty graficznej, GTX 260, compute capability 1.3, jedna jednostka kopiująca dane, operacje powinny być kolejkowane tak jak przedstawiono na listingu 3. W przypadku wykorzystania jednej pętli, mechanizm kolejkujący karty graficznej nie byłby w stanie zrównoleglić operacji. Zupełnie inaczej sytuacja wygląda w przypadku kart graficznych z compute capability 2.0, kiedy dostępne są dwie jednostki kopiujące dane (jedna do pamięci karty graficznej, druga z pamięci karty graficznej do pamięci operacyjnej). W takim przypadku, oddzielne zakolejkowanie operacji w trzech pętlach umożliwiłoby jednoczesne kopiowanie danych do pamięci karty oraz wykonywanie obliczeń, jednak kopiowanie wyników następowałoby dopiero po skończeniu przetwarzania kernela ostatniego strumienia, co nie byłoby optymalne, ponieważ druga jednostka kopiująca, mogłaby kopiować dane strumienia który zakonćzył już obliczenia w trakcie gdy trwa przetwarzanie następnego. Aby efektywnie wykorzystać możliwości takiej karty graficznej konieczne byłoby zastosowanie naprzemiennego kolejkowania operacji (jedna pętla).
+W odróżnieniu od poprzedniej wersji, wykorzystano tutaj oddzielne pętle, służące do kolejkowania transferu danych oraz wywołań kernela. Ma to na celu zakolejkowanie najpierw wszystkich operacji przesyłania danych do karty, następnie wszystkich wywołań kerneli i na końcu wszystkich operacji kopiowania wyników obliczeń. W przypadku wykorzystania jednej pętli, wymienione operacje byłyby kolejkowane na przemian. Kolejność kolejkowania ma ogromne znaczenie w przypadku pracy z kartami graficznymi ze starszych generacji. W przypadku wykorzystywanej karty graficznej, GTX 260, compute capability 1.3, jedna jednostka kopiująca dane, operacje powinny być kolejkowane tak jak przedstawiono na listingu 3. W przypadku wykorzystania jednej pętli, mechanizm kolejkujący karty graficznej nie byłby w stanie zrównoleglić operacji. Zupełnie inaczej sytuacja wygląda w przypadku kart graficznych z compute capability 2.0, kiedy dostępne są dwie jednostki kopiujące dane (jedna do pamięci karty graficznej, druga z pamięci karty graficznej do pamięci operacyjnej). W takim przypadku, oddzielne zakolejkowanie operacji w trzech pętlach umożliwiłoby jednoczesne kopiowanie danych do pamięci karty oraz wykonywanie obliczeń, jednak kopiowanie wyników następowałoby dopiero po skończeniu przetwarzania kernela ostatniego strumienia, co nie byłoby optymalne, ponieważ druga jednostka kopiująca, mogłaby kopiować dane strumienia który zakończył już obliczenia w trakcie gdy trwa przetwarzanie następnego. Aby efektywnie wykorzystać możliwości takiej karty graficznej konieczne byłoby zastosowanie naprzemiennego kolejkowania operacji (jedna pętla).
 
 Powyższe uwagi nie dotyczą nowszych kart graficznych, obsługujących co najmniej compute capability 3.5, w przypadku których kolejność zlecania operacji nie ma znaczenia, ponieważ system zarządzający potrafi uszeregować te operacje w optymalny sposób. Nowsze karty graficzne oferują także wiele innych usprawnień, m.in. zaawansowany mechanizm dostępu do pamięci globalnej, zmniejszający straty wydajności, w przypadkach gdzie dostęp do pamięci globalnej na kartach z compute capability nie mógł być łączony (z powodu nieodpowiedniego adresowania).
 
@@ -153,19 +174,72 @@ Powyższe uwagi nie dotyczą nowszych kart graficznych, obsługujących co najmn
 \end{listing}
 
 
-%\section{Eksperyment pomiarowy}
-%TODO
-%
-%\subsection{Instancje}
-%
-%TODO
-%
-%\subsection{Mierzone parametry}
-%
-%TODO
-%
-%\section{Wnioski}
-%
-%TODO
+\section{Eksperyment pomiarowy}
+TODO
+
+\subsection{Instancje}
+
+\subsubsection*{Rozmiar macierzy}
+W zadaniu wykorzystano macierze kwadratowe o następujących rozmiarach (n - wielkość jednego wymiaru):
+\begin{itemize}
+\item n = 224
+\item n = 1120
+\item n = 864
+\item n = 1728
+\end{itemize}
+
+\subsubsection*{Wielkość bloku wątków}
+
+W celu zbadania wpływu rozmiaru bloku na czas obliczeń każda instancja została uruchomiona dla wielkości bloków:
+\begin{itemize}
+\item BS = 8 x 8
+\item BS = 16 x 16
+\end{itemize}
+{\footnotesize Przyjęto oznaczenie BS, które będzie dalej wykorzystywane we wzorach i wnioskach.}
+
+Wielkości instancji dobrano tak, aby zapewnić zrównoważone obciążenie karty graficznej. Rozmiar macierzy jest zawsze wielokrotnością rozmiaru bloku wątków, natomiast wielkość bloku wątków (64 lub 256) gwarantuje optymalny podział wątków na 32-wątkowe wiązki. Dzięki temu kod nie musi zawierać instrukcji warunkowych, sprawdzających czy dany wątek ma prace. Wszystkie wątki wiązki zawsze wykonują w jednej chwili tą samą operację, rozbieżność przetwarzania wątków wiązki nie występuje.
+
+W przypadku rozmiaru bloku BS~=~16~x~16, aby w pełni wykorzystać możliwości karty, instancja powinna mieć rozmiar, dla którego liczba wszystkich bloków będzie wielokrotnością liczby 108. Wynika to z faktu, że jeden multiprocesor może przetwarzać współbieżnie (przełączając wiązki) 1024 wątki, co daje cztery 256-wątkowe bloki na każdy z 27 multiprocesorów. Instancja  n~=~224, BS~=~16~x~16 zostanie podzielona na 196 bloków, dlatego też w pewnym momencie obliczeń, niektóre mutliprocesory nie będą w pełni zajęte. Liczba bloków równa 216 zapewniłaby optymalne wykorzystanie zasobów karty, jednak nie da się stworzyć macierzy kwadratowej, która dzieliłaby się na tyle bloków. Można zatem przyjąć, że średnie teoretyczne wykorzystanie zasobów karty graficznej wynosi $196 / 216 \approx 91\% $. Analogicznie dla instancji  n~=~1120, BS~=~16~x~16, uzyskamy wartość $4900 / 4968 \approx 99\% $
+
+W przypadku rozmiaru bloku  BS~=~8~x~8, liczba bloków przydzielonych na jeden multiprocesor powinna wynosić 16. Niestety, dla compute capability 1.3 maksymalna liczba bloków aktywnych jednocześnie na multiprocesorze wynosi 8. Dlatego też multiprocesor będzie przetwarzał maksymalnie 512 wątków, przez co jego zajętość wyniesie maksymalnie $50\%$.  Uwzględniając fakt, że liczba bloków nie jest równa wielokrotności 216 (8 bloków na każdy z 27 multiprocesorów), średnie teoretyczne wykorzystanie zasobów całej karty wyniesie ok. $45\%$ dla instancji n~=~224 oraz n~=~1120.
+
+Eksperyment nie obejmuje obliczeń z wykorzystaniem bloków wątków o wymiarach 32~x~32, ponieważ wykorzystana karta graficzna pozwala na stworzenie bloków, zawierających maksymalnie 512 wątków.
+
+
+\subsubsection*{Liczba obliczanych macierzy}
+
+Skrócenie czasu przetwarzania w wersji 5 (zrównoleglenie obliczeń i transferu danych) jest możliwe, jeśli wykorzystamy więcej niż jeden strumień. Eksperyment przeprowadzono dla 1, 5 i 10 obliczanych macierzy. W przypadku obliczania tylko jednej macierzy, należy spodziewać się braku skrócenia czasu przetwarzania w stosunku do wersji 3 kodu.
+
+\subsection{Mierzone parametry}
+
+TODO
+
+\subsection{Wyniki eksperymentu}
+
+TODO\\
+jeśli będą pasować to wrzucić ty przykładowe screeny, tabele na pewno z czasem przetwarzania, być może też z innymi, niezerowymi parametrami (gld, gst)
+
+\subsection{Wzory}
+
+TODO
+\textit{wzory zastosowane do obliczeń wszystkich prezentowanych miar efektywności, znaczenie i zakres wartości
+miar efektywności,}
+
+\subsection{Wyniki}
+
+\textit{najważniejsze wyniki w postaci tabelarycznej (oraz wykresów - opcjonalnie dla lepszej wizualizacji), tabele (i
+wykresy) należy ponumerować i podpisać w sposób nie budzący wątpliwości co do zawartości, analiza
+poprawności prezentowanych wartości i ich zależności od wielkości instancji – czy wartości mieszczą się w
+dopuszczalnym zakresie.}
+
+\section{Wnioski}
+
+TODO
+
+\textit{wnioski z wykonanych eksperymentów z uzasadnieniem (CGMA, zajętość multiprocesora, łączenie dostępów,
+rozbieżność przetwarzania, lokalność dostępu do danych, synchronizacja wątków, ilość pracy wątków)
+obserwowanych wartości (czytelne odwołanie do omawianej wielkości - gdzie się znajduje i jakiego
+uruchomienia - system, parametry, wersja kodu – dotyczą).}\\
+-----------------------------------------
 
 \end{document}
