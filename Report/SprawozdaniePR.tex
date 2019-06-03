@@ -222,7 +222,18 @@ Skrócenie czasu przetwarzania w wersji 5 (zrównoleglenie obliczeń i transferu
 
 \subsection{Mierzone parametry}
 
-TODO
+Czas przetwarzania każdej instancji był mierzony w kodzie, za pomocą zdarzeń start i stop (na podstawie przykładowych kodów NVIDII). Obejmował on czas kopiowania danych na kartę graficzną, czas przetwarzania kerneli oraz czas kopiowania wyników do pamięci operacyjnej.
+
+Za pomocą programu NVIDIA Visual Profiler dokonano pomiaru zdarzeń związanych z dostępem do pamięci. Metryki potrzebne do zbadania efektywności to: 
+\begin{itemize}
+\item \verb|gld 32B| -- liczba 32 bajtowych transakcji pobierania danych z pamięci globalnej,
+\item \verb|gld 64B| -- liczba 64 bajtowych transakcji pobierania danych z pamięci globalnej,
+\item \verb|gst 32B| -- licznik 32 bajtowych transakcji zapisu danych do pamięci globalnej, każda transakcja powoduje inkrementację licznika o 2,
+\item \verb|gst 64B| -- licznik 64 bajtowych transakcji zapisu danych do pamięci globalnej, każda transakcja powoduje inkrementację licznika o 4.
+\end{itemize}
+
+Ponadto w celu obliczenia wartości miar \verb|gld efficiency| oraz \verb|gst efficiency| potrzebne są także liczniki  \verb|gld request| oraz  \verb|gst request|. Niestety z niewyjaśnionych przyczyn program NVIDIA Visual Profiler nie był w stanie zebrać tych  miar (wartości dla wszystkich testowanych instancji były równe 0). W przypadku realizowanego zadania miary te nie są jednak kluczowe, ponieważ celem było zbadanie przyspieszenia przetwarzania dzięki zrównolegleniu obliczeń oraz transferów między pamięcią operacyjną a globalną karty.
+
 
 \subsection{Wyniki eksperymentu}
 
@@ -241,6 +252,10 @@ miar efektywności,}
 wykresy) należy ponumerować i podpisać w sposób nie budzący wątpliwości co do zawartości, analiza
 poprawności prezentowanych wartości i ich zależności od wielkości instancji – czy wartości mieszczą się w
 dopuszczalnym zakresie.}
+
+TODO zebrać wyniki z profilera w tabelce, ale one się powtarzają, więc pogrupować.
+
+Warto zwrócić uwagę na wskaźnik \verb|warp serialize| (TODO albo wstawić tabelę albo "wartości znajdują się w załączonym arkuszu z wynikami pomiarów (TODO nazwa pliku)"). Określa on liczbę wiązek, dla których dostęp do pamięci współdzielonej musiał odbywać się sekwencyjnie z powodu konfliktu w dostępie do banków pamięci. W przypadku omawianego kodu, konflikt nigdy nie powinien występować, zarówno w przypadku wykorzystania bloków 16~x~16 jaki i 8~x~8. Wartość tego wskaźnika jest jednak niezerowa w przypadku wszystkich instancji, gdzie BS = 8~x~8. Trudno wyjaśnić co wpłynęło na taki wynik, być może wątki w przypadku instancji z tym rozmiarem bloku były szeregowane w inny sposób, przez co konflikty w dostępie były możliwe.
 
 \section{Wnioski}
 
@@ -271,6 +286,21 @@ W przypadku każdej testowanej instancji żądania zasobowe dotyczące liczby re
 
 CGMA (Compute to Global Memory Access ratio) jest współczynnikiem określającym intensywność obliczeń, to znaczy ile operacji arytmetycznych (w przypadku mnożenia macierzy będą to operacje dodawania i mnożenia) przypada na dostęp do danych w pamięci globalnej. W przypadku mnożenia macierzy z wykorzystaniem pamięci globalnej do przechowywania wielokrotnie wykorzystywanych bloków macierzy A i B, CGMA będzie równe rozmiarowi bloku (BS). Wynika to z faktu, że każdy wątek bloku pobiera do pamięci współdzielonej po jednej wartości z macierzy A oraz B. Następnie dany wątek w pętli wewnętrznej wykorzystuje jeden wiersz bloku macierzy A oraz jedną kolumnę bloku macierzy B, a zatem wykonuje dwie operacje arytmetyczne BS razy, samemu pobierając wcześniej z pamięci globalnej tylko 2 wartości.
 
+\subsection{Skrócenie czasu przetwarzania wersji 5 kodu}
+
+\subsubsection{Wpływ liczby obliczanych macierzy}
+
+W przypadku obliczania tylko jednej macierzy spodziewanym wynikiem jest brak przyspieszenia, ponieważ nie da się zrównoleglić przesyłania danych i obliczeń. Czas przetwarzania wersji 5 kodu był jednak prawie zawsze krótszy. Jest to spowodowane różnym sposobem alokacji pamięci hosta. Wersja 5 wymagała pamięci z wyłączonym stronicowaniem. Okazuje się jednak, że transfer danych zaalokowanych w ten sposób zawsze (TODO a może jednak nie zawsze tylko zwykle?) trwa nieco krócej. \textit{TODO opisać że alokacja jest wolniejsza, i nie należy nadużywać, bo zamula system (albo jakoś tak, to co gdzieś czytałem).}. Nie należy zatem podczas analizy wpływu innych parametrów brać pod uwagę instancji, gdzie obliczana była tylko jedna macierz.
+
+TODO reszta wniosków do tej sekcji.
+
+\subsubsection{Wpływ wielkości bloku wątków}
+
+Zgonie z wykresem (TODO ref) wykorzystanie większego rozmiaru bloku przekłada się na większy zysk ze zrónoleglenia obliczeń i przesyłania danych. (TODO sprawdzić ten wyjątek). Jest to zgodne z oczekiwaniami, ponieważ czas przetwarzania obliczeń w przypadku bloków 8~x~8 był zawsze dłuższy (z powodu małej zajętości multiprocesorów). Z tego powodu koszt przesyłania danych stanowi większy procent łącznego czasu przetwarzania dla BS~=~16~x~16. Ukrycie kosztów transferu danych przynosi zatem większe zyski.
+
+\subsubsection{Wpływ wielkości pojedynczej macierzy}
+
+Analizując wykres (TODO ref) trudno dostrzec wyraźną zależność skrócenia czasu od rozmiaru macierzy. Biorąc pod uwagę fakt, że koszt przesyłania danych stanowi większy procent czasu w przypadku mniejszych instancji (trzeba przesłać łącznie $3n^2$ danych, natomiast złożoność obliczeniowa wynosi $2n^3$, należy się spodziewać większych zysków w przypadku mniejszych macierzy. Wyniki dla instancji n~=~864 oraz n~=~1728, potwierdzają te przypuszczenia. Dwie pozostałe instancje nie potwierdzają tej tezy, jednak w tym przypadku wyniki były są zaburzone przez fakt, że charakteryzowały się one różną zajętością multiprocesorów. Szczególny przypadek stanowi instancja n~=~224, gdzie obliczenia trwały krócej, niż przesyłanie danych. (!!!!TODO opisać ten dziwny przypadek, czemu gdzieś nastąpiło spowolnienie)
 
 
 
