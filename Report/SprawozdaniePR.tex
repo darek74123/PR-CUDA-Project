@@ -174,8 +174,7 @@ Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki nale
 
 Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
 
-TODO to powyżej jakoś sensownie podzielić na akapity\\
-\textbf{TODO rysunki: przesyłanie sync/async}
+\textbf{TODO rysunki: te z macierzami i te z przesyłaniem normalnym i asynchronicznym w strumieniach, w miarę możliwości czas kopiowania niech będzie trochę krótszy niż wykonanie kernela, ale też nie bardzo krótki, żeby było widać że zysk jest znaczący, ważne żeby zachować proporcje, z RAM do VRAM leci dwa razy więcej danych niż z powrotem}
 
 \textit{\textbf{rysunki z opisem określające:}}
 \textit{\begin{itemize}
@@ -208,7 +207,6 @@ Powyższe uwagi nie dotyczą nowszych kart graficznych, obsługujących co najmn
 
 
 \section{Eksperyment pomiarowy}
-TODO
 
 \subsection{Instancje}
 
@@ -260,10 +258,27 @@ Ponadto w celu obliczenia wartości miar \verb|gld efficiency| oraz \verb|gst ef
 
 \subsection{Wyniki eksperymentu}
 
-TODO\\
-jeśli będą pasować to wrzucić ty przykładowe screeny, tabele na pewno z czasem przetwarzania, być może też z innymi, niezerowymi parametrami (gld, gst)
+\textbf{TODO}\\
+jeśli będą pasować to wrzucić ty przykładowe screeny, tabele na pewno z czasem przetwarzania, być może też z innymi, niezerowymi parametrami (gld, gst), \textbf{ALBO raczej} opisać tutaj załączniki do sprawka, może też na które warto zwrócić uwagę (zwłaszcza screeny)
 
 \subsection{Wzory}
+
+Prędkość przetwarzania
+\begin{equation}
+PP = \frac{Z}{T} = \frac{2 \cdot n^3}{T} \; \in \; \mathbb{R}_+
+\end{equation}
+
+Przyspieszenie przetwarzania wersji 5 kodu (ukrywanie kosztów transferu w czasie obliczeń) do wersji 3
+\begin{equation}
+P_{w5} = \frac{T_{w5}}{T_{w3}} \cdot 100\% \; \in \; \mathbb{R}_+
+\end{equation}
+
+Przyspieszenie w stosunku do obliczeń sekwencyjnych na CPU metodą IKJ
+\begin{equation}
+P_{GPU} = \frac{T_{GPU}}{T_{CPU}} \cdot 100\% \; \in \; \mathbb{R}_+
+\end{equation}
+
+Sposób obliczenia zajętości multiprocesora został omówiony w punkcie 3.1, natomiast sposób wyznaczenia CGMA we wnioskach.
 
 TODO
 \textit{wzory zastosowane do obliczeń wszystkich prezentowanych miar efektywności, znaczenie i zakres wartości
@@ -271,18 +286,100 @@ miar efektywności,}
 
 \subsection{Wyniki}
 
-\textit{najważniejsze wyniki w postaci tabelarycznej (oraz wykresów - opcjonalnie dla lepszej wizualizacji), tabele (i
-wykresy) należy ponumerować i podpisać w sposób nie budzący wątpliwości co do zawartości, analiza
-poprawności prezentowanych wartości i ich zależności od wielkości instancji – czy wartości mieszczą się w
-dopuszczalnym zakresie.}
+Poniższa tabela oraz wykresy obrazują efektywność przetwarzania poszczególnych instancji. Pełne, pogrupowane dane oraz wykresy znajdują się również w załączonym arkuszu.
 
-TODO zebrać wyniki z profilera w tabelce, ale one się powtarzają, więc pogrupować.
+\begin{table}[H]
+\centering
+\def\arraystretch{1.05}
+\begin{adjustbox}{totalheight=\textheight-\baselineskip}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+N	&	BS	&	Wersja kodu	&	Lm	&	Czas [ms]	&	$PP$ [GFLOPS]	&	$P_{GPU}$	\\ \hline
+224	&	16	&	5	&	10	&	4.49968	&	49.96	&	17.84	\\ \hline
+224	&	16	&	3	&	10	&	6.58928	&	34.11	&	12.18	\\ \hline
+224	&	8	&	5	&	10	&	4.95914	&	45.33	&	16.19	\\ \hline
+224	&	8	&	3	&	10	&	9.0527	&	24.83	&	8.87	\\ \hline
+224	&	16	&	5	&	5	&	2.87206	&	39.13	&	14.67	\\ \hline
+224	&	16	&	3	&	5	&	3.47869	&	32.31	&	12.11	\\ \hline
+224	&	8	&	5	&	5	&	3.99331	&	28.15	&	10.55	\\ \hline
+224	&	8	&	3	&	5	&	4.14125	&	27.14	&	10.18	\\ \hline
+224	&	16	&	5	&	1	&	1.72758	&	13.01	&	5.23	\\ \hline
+224	&	16	&	3	&	1	&	0.820768	&	27.39	&	11.01	\\ \hline
+224	&	8	&	5	&	1	&	1.7937	&	12.53	&	5.04	\\ \hline
+224	&	8	&	3	&	1	&	0.872416	&	25.77	&	10.36	\\ \hline
+1120	&	16	&	5	&	10	&	148.783	&	188.86	&	45.37	\\ \hline
+1120	&	16	&	3	&	10	&	232.467	&	120.87	&	29.04	\\ \hline
+1120	&	8	&	5	&	10	&	277.647	&	101.2	&	24.31	\\ \hline
+1120	&	8	&	3	&	10	&	358.398	&	78.4	&	18.84	\\ \hline
+1120	&	16	&	5	&	5	&	76.5913	&	183.43	&	44.34	\\ \hline
+1120	&	16	&	3	&	5	&	115.322	&	121.83	&	29.45	\\ \hline
+1120	&	8	&	5	&	5	&	144.852	&	96.99	&	23.45	\\ \hline
+1120	&	8	&	3	&	5	&	177.629	&	79.09	&	19.12	\\ \hline
+1120	&	16	&	5	&	1	&	18.5323	&	151.62	&	37.09	\\ \hline
+1120	&	16	&	3	&	1	&	22.7764	&	123.37	&	30.18	\\ \hline
+1120	&	8	&	5	&	1	&	31.626	&	88.85	&	21.74	\\ \hline
+1120	&	8	&	3	&	1	&	36.3668	&	77.26	&	18.9	\\ \hline
+864	&	16	&	5	&	10	&	36.3386	&	354.98	&	75.49	\\ \hline
+864	&	16	&	3	&	10	&	59.0637	&	218.4	&	46.44	\\ \hline
+864	&	8	&	5	&	10	&	65.9215	&	195.68	&	41.61	\\ \hline
+864	&	8	&	3	&	10	&	88.1335	&	146.36	&	31.12	\\ \hline
+864	&	16	&	5	&	5	&	9.89984	&	651.5	&	140.53	\\ \hline
+864	&	16	&	3	&	5	&	12.0329	&	536.01	&	115.62	\\ \hline
+864	&	8	&	5	&	5	&	15.7338	&	409.93	&	88.42	\\ \hline
+864	&	8	&	3	&	5	&	17.9046	&	360.23	&	77.7	\\ \hline
+864	&	16	&	5	&	1	&	69.9345	&	18.45	&	4.02	\\ \hline
+864	&	16	&	3	&	1	&	120.85	&	10.67	&	2.33	\\ \hline
+864	&	8	&	5	&	1	&	129.023	&	10	&	2.18	\\ \hline
+864	&	8	&	3	&	1	&	176.783	&	7.3	&	1.59	\\ \hline
+1728	&	16	&	5	&	10	&	538.58	&	191.61	&	75.36	\\ \hline
+1728	&	16	&	3	&	10	&	721.525	&	143.02	&	56.25	\\ \hline
+1728	&	8	&	5	&	10	&	1873.81	&	55.07	&	21.66	\\ \hline
+1728	&	8	&	3	&	10	&	2056.47	&	50.18	&	19.74	\\ \hline
+1728	&	16	&	5	&	5	&	273.57	&	188.61	&	74.37	\\ \hline
+1728	&	16	&	3	&	5	&	360.715	&	143.04	&	56.4	\\ \hline
+1728	&	8	&	5	&	5	&	941.951	&	54.78	&	21.6	\\ \hline
+1728	&	8	&	3	&	5	&	1024.74	&	50.35	&	19.85	\\ \hline
+1728	&	16	&	5	&	1	&	61.2197	&	168.57	&	66.52	\\ \hline
+1728	&	16	&	3	&	1	&	72.2033	&	142.92	&	56.4	\\ \hline
+1728	&	8	&	5	&	1	&	191.03	&	54.02	&	21.32	\\ \hline
+1728	&	8	&	3	&	1	&	207.458	&	49.74	&	19.63	\\ \hline
+\end{tabular}
+\end{adjustbox}
+\caption{Prędkość przetwarzania oraz przyspieszenie względem CPU}
+\label{table:all}
+\end{table}
 
-Warto zwrócić uwagę na wskaźnik \verb|warp serialize| (TODO albo wstawić tabelę albo "wartości znajdują się w załączonym arkuszu z wynikami pomiarów (TODO nazwa pliku)"). Określa on liczbę wiązek, dla których dostęp do pamięci współdzielonej musiał odbywać się sekwencyjnie z powodu konfliktu w dostępie do banków pamięci. W przypadku omawianego kodu, konflikt nigdy nie powinien występować, zarówno w przypadku wykorzystania bloków 16~x~16 jaki i 8~x~8. Wartość tego wskaźnika jest jednak niezerowa w przypadku wszystkich instancji, gdzie BS = 8~x~8. Trudno wyjaśnić co wpłynęło na taki wynik, być może wątki w przypadku instancji z tym rozmiarem bloku były szeregowane w inny sposób, przez co konflikty w dostępie były możliwe.
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.95\textwidth]{charts/Lm.png}
+    \caption{Wpływ liczby obliczanych na przyspieszenie}
+    \label{chart:Lm}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.95\textwidth]{charts/BS.png}
+    \caption{Wpływ wielkości bloku wątków na przyspieszenie}
+    \label{chart:BS}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=0.95\textwidth]{charts/MatrixSize.png}
+    \caption{Wpływ rozmiaru pojedynczej macierzy na przyspieszenie}
+    \label{chart:MatrixSize}
+\end{figure}
+
+
+
+Powyższe wykresy przedstawiają stosunek czasu przetwarzania wersji 5 do wersji 3 kodu.
+
+\textbf{TODO} zebrać wyniki z profilera w tabelce, ale one się powtarzają, więc pogrupować.\\
+\textbf{TODO} opisać cokolwiek o tych gld i gst z profilera, że mają sens te wartości
+
+Warto zwrócić uwagę na wskaźnik \verb|warp serialize| (dokładne wartości znajdują się w załączonym arkuszu z wynikami pomiarów"). Określa on liczbę wiązek, dla których dostęp do pamięci współdzielonej musiał odbywać się sekwencyjnie z powodu konfliktu w dostępie do banków pamięci. W przypadku omawianego kodu, konflikt nigdy nie powinien występować, zarówno w przypadku wykorzystania bloków 16~x~16 jaki i 8~x~8. Wartość tego wskaźnika jest jednak niezerowa w przypadku wszystkich instancji, gdzie BS = 8~x~8. Trudno wyjaśnić co wpłynęło na taki wynik, być może wątki w przypadku instancji z tym rozmiarem bloku były szeregowane w inny sposób, przez co konflikty w dostępie były \texttt{możliwe}.
 
 \section{Wnioski}
-
-TODO
 
 \textit{wnioski z wykonanych eksperymentów z uzasadnieniem (CGMA, zajętość multiprocesora, łączenie dostępów,
 rozbieżność przetwarzania, lokalność dostępu do danych, synchronizacja wątków, ilość pracy wątków)
@@ -302,29 +399,34 @@ Dostęp do pamięci w przypadku wykorzystania bloków wątków 8~x~8 wciąż jes
 
 W celu zapewnienia optymalnej efektywności przetwarzanie, należy maksymalizować zajętość wszystkich multiprocesorów karty. Dla instancji n~=~224 oraz n~=~1120 oraz obu rozważanych rozmiarów bloku wątków analiza zajętości została przeprowadzona już w punkcie 3.2. Dwie pozostałe instancje n~=~864 oraz n~=~1728, zostały wybrane, ponieważ umożliwiają osiągnięcie  100\% teoretycznej zajętości wszystkich multiprocesorów, w przypadku bloków 16~x~16. W przypadku mniejszych bloków, zajętość procesorów osiągnie 50\%, ograniczeniem jest tutaj limit 8 bloków na multiprocesor.
 
-W przypadku każdej testowanej instancji żądania zasobowe dotyczące liczby rejestrów oraz pamięci współdzielonej były na tyle małe, że nie stanowiły ograniczenia dla zajętości multiprocesorów.
-%TODO opisać tu dokładne wartości, jeśli uda się wykminić, jest takie wymaganie w opisie projektu
+W przypadku każdej testowanej instancji żądania zasobowe dotyczące liczby rejestrów oraz pamięci współdzielonej były na tyle małe, że nie stanowiły ograniczenia dla zajętości multiprocesorów. Liczba wykorzystywanych przez wątek rejestrów była zawsze równa 13, co pokrywa się z liczbą zmiennych lokalnych w kodzie kernela, natomiast rozmiar wykorzystanej pamięci współdzielonej był równy 548 B dla BS~=~8~x~8 oraz 2084 B dla BS~=~16~x~16. W obu przypadkach wartość ta była większa o 36 B od spodziewanej, przypuszczalnie więc karta graficzna zawsze wykorzystuje niewielką ilość pamięci współdzielonej do innych celów.
 
 \subsection{CGMA}
 
-CGMA (Compute to Global Memory Access ratio) jest współczynnikiem określającym intensywność obliczeń, to znaczy ile operacji arytmetycznych (w przypadku mnożenia macierzy będą to operacje dodawania i mnożenia) przypada na dostęp do danych w pamięci globalnej. W przypadku mnożenia macierzy z wykorzystaniem pamięci globalnej do przechowywania wielokrotnie wykorzystywanych bloków macierzy A i B, CGMA będzie równe rozmiarowi bloku (BS). Wynika to z faktu, że każdy wątek bloku pobiera do pamięci współdzielonej po jednej wartości z macierzy A oraz B. Następnie dany wątek w pętli wewnętrznej wykorzystuje jeden wiersz bloku macierzy A oraz jedną kolumnę bloku macierzy B, a zatem wykonuje dwie operacje arytmetyczne BS razy, samemu pobierając wcześniej z pamięci globalnej tylko 2 wartości.
+CGMA (Compute to Global Memory Access ratio) jest współczynnikiem określającym intensywność obliczeń, to znaczy ile operacji arytmetycznych (w przypadku mnożenia macierzy będą to operacje dodawania i mnożenia) przypada na dostęp do danych w pamięci globalnej. W przypadku mnożenia macierzy z wykorzystaniem pamięci współdzielonej do przechowywania wielokrotnie wykorzystywanych bloków macierzy A i B, CGMA będzie równe $2 \cdot \text{BS} / 3$. Wynika to z faktu, że każdy wątek bloku pobiera do pamięci współdzielonej po jednej wartości z macierzy A oraz B. Następnie dany wątek w pętli wewnętrznej wykorzystuje jeden wiersz bloku macierzy A oraz jedną kolumnę bloku macierzy B, a zatem wykonuje dwie operacje arytmetyczne BS razy, samemu pobierając wcześniej z pamięci globalnej tylko 2 wartości. Ostatecznie każdy wątek zapisuje jedną wartość (wynik) do pamięci globalnej, stąd łącznie wartość mianownika wynosi 3 (2 odczyty, 1 zapis).
 
 \subsection{Skrócenie czasu przetwarzania wersji 5 kodu}
 
-\subsubsection{Wpływ liczby obliczanych macierzy}
+\subsubsection*{Wpływ liczby obliczanych macierzy}
 
 W przypadku obliczania tylko jednej macierzy spodziewanym wynikiem jest brak przyspieszenia, ponieważ nie da się zrównoleglić przesyłania danych i obliczeń. Czas przetwarzania wersji 5 kodu był jednak prawie zawsze krótszy. Jest to spowodowane różnym sposobem alokacji pamięci hosta. Wersja 5 wymagała pamięci z wyłączonym stronicowaniem. Okazuje się jednak, że transfer danych zaalokowanych w ten sposób zawsze (TODO a może jednak nie zawsze tylko zwykle?) trwa nieco krócej. \textit{TODO opisać że alokacja jest wolniejsza, i nie należy nadużywać, bo zamula system (albo jakoś tak, to co gdzieś czytałem).}. Nie należy zatem podczas analizy wpływu innych parametrów brać pod uwagę instancji, gdzie obliczana była tylko jedna macierz.
 
-TODO reszta wniosków do tej sekcji.
+\textbf{TODO} reszta wniosków do tej sekcji. oraz wstawić gdzieś ref
 
-\subsubsection{Wpływ wielkości bloku wątków}
+\subsubsection*{Wpływ wielkości bloku wątków}
 
-Zgonie z wykresem (TODO ref) wykorzystanie większego rozmiaru bloku przekłada się na większy zysk ze zrónoleglenia obliczeń i przesyłania danych. (TODO sprawdzić ten wyjątek). Jest to zgodne z oczekiwaniami, ponieważ czas przetwarzania obliczeń w przypadku bloków 8~x~8 był zawsze dłuższy (z powodu małej zajętości multiprocesorów). Z tego powodu koszt przesyłania danych stanowi większy procent łącznego czasu przetwarzania dla BS~=~16~x~16. Ukrycie kosztów transferu danych przynosi zatem większe zyski.
+Zgonie z wykresem \ref{chart:BS} wykorzystanie większego rozmiaru bloku przekłada się na większy zysk ze zrónoleglenia obliczeń i przesyłania danych. (TODO sprawdzić ten wyjątek). Jest to zgodne z oczekiwaniami, ponieważ czas przetwarzania obliczeń w przypadku bloków 8~x~8 był zawsze dłuższy (z powodu małej zajętości multiprocesorów). Z tego powodu koszt przesyłania danych stanowi większy procent łącznego czasu przetwarzania dla BS~=~16~x~16. Ukrycie kosztów transferu danych przynosi zatem większe zyski.
 
-\subsubsection{Wpływ wielkości pojedynczej macierzy}
+\subsubsection*{Wpływ wielkości pojedynczej macierzy}
 
-Analizując wykres (TODO ref) trudno dostrzec wyraźną zależność skrócenia czasu od rozmiaru macierzy. Biorąc pod uwagę fakt, że koszt przesyłania danych stanowi większy procent czasu w przypadku mniejszych instancji (trzeba przesłać łącznie $3n^2$ danych, natomiast złożoność obliczeniowa wynosi $2n^3$, należy się spodziewać większych zysków w przypadku mniejszych macierzy. Wyniki dla instancji n~=~864 oraz n~=~1728, potwierdzają te przypuszczenia. Dwie pozostałe instancje nie potwierdzają tej tezy, jednak w tym przypadku wyniki były są zaburzone przez fakt, że charakteryzowały się one różną zajętością multiprocesorów. Szczególny przypadek stanowi instancja n~=~224, gdzie obliczenia trwały krócej, niż przesyłanie danych. (!!!!TODO opisać ten dziwny przypadek, czemu gdzieś nastąpiło spowolnienie)
+Analizując wykres \ref{chart:MatrixSize} trudno dostrzec wyraźną zależność skrócenia czasu od rozmiaru macierzy. Biorąc pod uwagę fakt, że koszt przesyłania danych stanowi większy procent czasu w przypadku mniejszych instancji (trzeba przesłać łącznie $3n^2$ danych, natomiast złożoność obliczeniowa wynosi $2n^3$, należy się spodziewać większych zysków w przypadku mniejszych macierzy. Wyniki dla instancji n~=~864 oraz n~=~1728, potwierdzają te przypuszczenia. Dwie pozostałe instancje nie potwierdzają tej tezy, jednak w tym przypadku wyniki były są zaburzone przez fakt, że charakteryzowały się one różną zajętością multiprocesorów. Szczególny przypadek stanowi instancja n~=~224, gdzie obliczenia trwały krócej, niż przesyłanie danych. (!!!!TODO opisać ten dziwny przypadek, czemu gdzieś nastąpiło spowolnienie)
 
+
+
+\textbf{TODO} taki ogólny wniosek, że jest szybciej niż na procku (wymagane)\\
+\textit{4. Umiejętność oceny liczby dostępów do pamięci globalnej (odczyt i zapis) w funkcji rozmiaru problemu dla
+poszczególnych wersji kodu.} -- wymagane\\
+\textit{miara stopnia łączenia dostępów do pamięci globalnej} -- i jeszcze to...
 
 
 \end{document}
