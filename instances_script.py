@@ -14,6 +14,6 @@ with open(result_filename, 'w') as result_file:
             a, s, d, f = filename.split(" ")
             a = a[a.rfind('/') + 1:]
             f = f[:-4]
-            result_file.write("Rozmiar macierzy: " + a + ", Rozmiar bloku: " + s + ", Liczba obliczanych macierzy: " + f + ", Wersja kodu: " + d + ",,,,,,,,,,,,,,,,,,,,,,,,,,\n")
+            result_file.write("Rozmiar macierzy: " + a + ", Rozmiar bloku: " + s + ", Liczba obliczanych macierzy: " + f + ", Wersja kodu: " + d + ",,,,,,,,,,,,,,,,,,,,,,,,,\n")
             result_file.write(file.read())
             result_file.write("\n\n")
