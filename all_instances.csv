@@ -1,4 +1,4 @@
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",140981030,833315,,,,,,,,,,2985984,3583259631,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",142465854,895880,,,,,,,,,,2985984,3333017814,,,,,,,,,,,,,,,,,
@@ -22,7 +22,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",225654356,2137773,,,,,,,,,,2985984,1396773184,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",195891881,2715894,,,,,,,,,,5017600,1847494784,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",199212495,1857138,,,,,,,,,,5017600,2701791681,,,,,,,,,,,,,,,,,
@@ -66,7 +66,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",423190279,3887121,,,,,,,,,,5017600,1290826809,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",174946791,649428,,,,,,,,,,2985984,4597867662,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",175598619,663989,,,,,,,,,,2985984,4497038354,,,,,,,,,,,,,,,,,
@@ -110,7 +110,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",302220484,683255,,,,,,,,,,2985984,4370233660,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",110530045,2371069,,,,,,,,,,11943936,5037363315,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",112902074,2487880,,,,,,,,,,11943936,4800848915,,,,,,,,,,,,,,,,,
@@ -118,7 +118,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",298308555,2425794,,,,,,,,,,11943936,4923722294,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",97312148,1758001,,,,,,,,,,5017600,2854150822,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",99716699,1687467,,,,,,,,,,5017600,2973450740,,,,,,,,,,,,,,,,,
@@ -126,7 +126,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",128678321,3713714,,,,,,,,,,5017600,1351100273,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",102748022,46084,,,,,,,,,,200704,4355177501,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",102971017,44996,,,,,,,,,,200704,4460485376,,,,,,,,,,,,,,,,,
@@ -150,7 +150,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",105896513,37027,,,,,,,,,,200704,5420476949,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",114796653,4585295,,,,,,,,,,11943936,2604834803,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",119929864,4221106,,,,,,,,,,11943936,2829574997,,,,,,,,,,,,,,,,,
@@ -158,7 +158,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",312428651,8162476,,,,,,,,,,11943936,1463273643,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",180771903,4459937,,,,,,,,,,11943936,2678050385,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",185791149,4346424,,,,,,,,,,11943936,2747991452,,,,,,,,,,,,,,,,,
@@ -182,7 +182,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",531560528,8455071,,,,,,,,,,11943936,1412635801,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",118689498,2385667,,,,,,,,,,11943936,5006539470,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",121076797,2503404,,,,,,,,,,11943936,4771078100,,,,,,,,,,,,,,,,,
@@ -190,7 +190,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",176651094,2425990,,,,,,,,,,11943936,4923324498,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",147784971,1020178,,,,,,,,,,5017600,4918357384,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",148806077,1066134,,,,,,,,,,5017600,4706350233,,,,,,,,,,,,,,,,,
@@ -214,7 +214,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",222282093,1158717,,,,,,,,,,5017600,4330306709,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",191125637,2366300,,,,,,,,,,11943936,5047515530,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",193492897,2414208,,,,,,,,,,11943936,4947351678,,,,,,,,,,,,,,,,,
@@ -238,7 +238,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",461047127,2770557,,,,,,,,,,11943936,4311023379,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",179501246,2387964,,,,,,,,,,11943936,5001723644,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",181890170,2404669,,,,,,,,,,11943936,4966977159,,,,,,,,,,,,,,,,,
@@ -262,7 +262,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",1117803981,2777499,,,,,,,,,,11943936,4300248532,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",92520108,45220,,,,,,,,,,200704,4438390092,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",92745087,43172,,,,,,,,,,200704,4648939127,,,,,,,,,,,,,,,,,
@@ -270,7 +270,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",92950257,39651,,,,,,,,,,200704,5061763889,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",258280470,4673230,,,,,,,,,,11943936,2555820278,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",263552275,4669710,,,,,,,,,,11943936,2557746840,,,,,,,,,,,,,,,,,
@@ -314,7 +314,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",2304273679,9107467,,,,,,,,,,11943936,1311444334,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",134814866,845892,,,,,,,,,,2985984,3529982550,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",136334157,881767,,,,,,,,,,2985984,3386363971,,,,,,,,,,,,,,,,,
@@ -338,7 +338,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",190876505,1718636,,,,,,,,,,2985984,1737415019,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",173606449,812673,,,,,,,,,,2985984,3674274892,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",175067877,888007,,,,,,,,,,2985984,3362568087,,,,,,,,,,,,,,,,,
@@ -382,7 +382,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",291565056,1631489,,,,,,,,,,2985984,1830220124,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",113603231,46084,,,,,,,,,,200704,4355177501,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",113831506,44547,,,,,,,,,,200704,4505443688,,,,,,,,,,,,,,,,,
@@ -426,7 +426,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",122329173,37859,,,,,,,,,,200704,5301355027,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",98622805,824133,,,,,,,,,,2985984,3623182180,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",100131635,882091,,,,,,,,,,2985984,3385120129,,,,,,,,,,,,,,,,,
@@ -434,7 +434,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",107661676,1686477,,,,,,,,,,2985984,1770545343,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",176217773,821281,,,,,,,,,,2985984,3635764129,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",177715492,1010512,,,,,,,,,,2985984,2954921861,,,,,,,,,,,,,,,,,
@@ -478,7 +478,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",349718630,2052771,,,,,,,,,,2985984,1454611352,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",145327477,706778,,,,,,,,,,2985984,4224783453,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",146035183,722298,,,,,,,,,,2985984,4134005632,,,,,,,,,,,,,,,,,
@@ -502,7 +502,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",180107377,661078,,,,,,,,,,2985984,4516840675,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",140295849,1724170,,,,,,,,,,5017600,2910153871,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",142617891,1590688,,,,,,,,,,5017600,3154358365,,,,,,,,,,,,,,,,,
@@ -526,7 +526,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",251448028,2962030,,,,,,,,,,5017600,1693973389,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",186631712,5164086,,,,,,,,,,11943936,2312884797,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",192400357,4683024,,,,,,,,,,11943936,2550475077,,,,,,,,,,,,,,,,,
@@ -550,7 +550,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",1201703430,8242024,,,,,,,,,,11943936,1449150839,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",182952249,1732009,,,,,,,,,,5017600,2896982636,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",185307027,1787437,,,,,,,,,,5017600,2807147888,,,,,,,,,,,,,,,,,
@@ -594,7 +594,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",535956588,4167625,,,,,,,,,,5017600,1203947092,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",106685580,51461,,,,,,,,,,200704,3900118536,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",106737265,80102,,,,,,,,,,200704,2505605353,,,,,,,,,,,,,,,,,
@@ -638,7 +638,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",110115211,77094,,,,,,,,,,200704,2603367317,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",131842390,717753,,,,,,,,,,2985984,4160183238,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",132561104,735995,,,,,,,,,,2985984,4057071039,,,,,,,,,,,,,,,,,
@@ -662,7 +662,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",196171066,664118,,,,,,,,,,2985984,4496164838,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",278522280,2353880,,,,,,,,,,11943936,5074148214,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",280876928,2417949,,,,,,,,,,11943936,4939697239,,,,,,,,,,,,,,,,,
@@ -706,7 +706,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",2148615255,2775673,,,,,,,,,,11943936,4303077487,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",101235538,784545,,,,,,,,,,2985984,3806007303,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",102654376,843207,,,,,,,,,,2985984,3541222973,,,,,,,,,,,,,,,,,
@@ -714,7 +714,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",116051111,1790325,,,,,,,,,,2985984,1667844665,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",196536831,1035858,,,,,,,,,,5017600,4843907176,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",197573489,1023601,,,,,,,,,,5017600,4901910021,,,,,,,,,,,,,,,,,
@@ -758,7 +758,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",343084383,1172124,,,,,,,,,,5017600,4280775754,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",266098421,2384826,,,,,,,,,,11943936,5008305008,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",268484047,2415260,,,,,,,,,,11943936,4945196790,,,,,,,,,,,,,,,,,
@@ -802,7 +802,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",800862839,2771385,,,,,,,,,,11943936,4309735385,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",105789992,1745968,,,,,,,,,,5017600,2873821284,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",108165452,1692909,,,,,,,,,,5017600,2963892329,,,,,,,,,,,,,,,,,
@@ -810,7 +810,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",124256993,3022202,,,,,,,,,,5017600,1660246403,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",108231742,55525,,,,,,,,,,200704,3614660063,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",108287523,96936,,,,,,,,,,200704,2070479491,,,,,,,,,,,,,,,,,
@@ -834,7 +834,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",110468730,39939,,,,,,,,,,200704,5025263526,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",274012201,4456412,,,,,,,,,,11943936,2680168709,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",279076501,4610537,,,,,,,,,,11943936,2590573722,,,,,,,,,,,,,,,,,
@@ -878,7 +878,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",985408331,8768878,,,,,,,,,,11943936,1362082583,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",192433725,1009839,,,,,,,,,,5017600,4968712834,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",193444364,1040562,,,,,,,,,,5017600,4822009644,,,,,,,,,,,,,,,,,
@@ -922,7 +922,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",467879722,1156507,,,,,,,,,,5017600,4338581608,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",88753070,62053,,,,,,,,,,200704,3234396403,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",88815347,91976,,,,,,,,,,200704,2182134469,,,,,,,,,,,,,,,,,
@@ -946,7 +946,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",90655920,67590,,,,,,,,,,200704,2969433348,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",95343589,752255,,,,,,,,,,2985984,3969377405,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",96096804,956432,,,,,,,,,,2985984,3122003446,,,,,,,,,,,,,,,,,
@@ -954,7 +954,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",109595887,662935,,,,,,,,,,2985984,4504188193,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",110340096,778721,,,,,,,,,,2985984,3834472166,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",111119745,954160,,,,,,,,,,2985984,3129437410,,,,,,,,,,,,,,,,,
@@ -962,7 +962,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",118747483,665144,,,,,,,,,,2985984,4489229399,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 864, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",176388001,699448,,,,,,,,,,2985984,4269057885,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",177088217,738427,,,,,,,,,,2985984,4043709127,,,,,,,,,,,,,,,,,
@@ -1006,7 +1006,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",244627885,684375,,,,,,,,,,2985984,4363081643,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",140358602,1041267,,,,,,,,,,5017600,4818744856,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",141400829,1080822,,,,,,,,,,5017600,4642392549,,,,,,,,,,,,,,,,,
@@ -1030,7 +1030,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",283150008,1159836,,,,,,,,,,5017600,4326128866,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",106578977,62757,,,,,,,,,,200704,3198113357,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",106641958,92392,,,,,,,,,,200704,2172309290,,,,,,,,,,,,,,,,,
@@ -1038,7 +1038,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",107503438,39844,,,,,,,,,,200704,5037245256,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",143425518,1639170,,,,,,,,,,5017600,3061061390,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",145678497,1588639,,,,,,,,,,5017600,3158426804,,,,,,,,,,,,,,,,,
@@ -1062,7 +1062,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",316221712,3653955,,,,,,,,,,5017600,1373196987,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",93883652,45092,,,,,,,,,,200704,4450989088,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",94104759,42915,,,,,,,,,,200704,4676779680,,,,,,,,,,,,,,,,,
@@ -1070,7 +1070,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",94427666,39620,,,,,,,,,,200704,5065724381,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1728, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",111613065,4393070,,,,,,,,,,11943936,2718813039,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",116568262,4440305,,,,,,,,,,11943936,2689890897,,,,,,,,,,,,,,,,,
@@ -1078,7 +1078,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",174032338,8195210,,,,,,,,,,11943936,1457428912,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",111800819,63974,,,,,,,,,,200704,3137274517,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",111865017,93640,,,,,,,,,,200704,2143357539,,,,,,,,,,,,,,,,,
@@ -1086,7 +1086,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",112603991,40067,,,,,,,,,,200704,5009209573,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 5, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",102093682,45028,,,,,,,,,,200704,4457315448,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",102318693,42980,,,,,,,,,,200704,4669706840,,,,,,,,,,,,,,,,,
@@ -1110,7 +1110,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",105892115,38276,,,,,,,,,,200704,5243599122,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 16, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",106703231,1016533,,,,,,,,,,5017600,4935993224,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",107720724,1287147,,,,,,,,,,5017600,3898233845,,,,,,,,,,,,,,,,,
@@ -1118,7 +1118,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",123434484,988018,,,,,,,,,,5017600,5078449987,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 8, Liczba obliczanych macierzy: 10, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",100361548,47364,,,,,,,,,,200704,4237479942,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",100409136,79238,,,,,,,,,,200704,2532926121,,,,,,,,,,,,,,,,,
@@ -1162,7 +1162,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [async]",104276852,40100,,,,,,,,,,200704,5005087281,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 224, Rozmiar bloku: 16, Liczba obliczanych macierzy: 10, Wersja kodu: 3,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [sync]",99683381,44964,,,,,,,,,,200704,4463659816,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [sync]",99905992,42884,,,,,,,,,,200704,4680160432,,,,,,,,,,,,,,,,,
@@ -1206,7 +1206,7 @@ Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Register
 "Memcpy DtoH [sync]",105976777,37027,,,,,,,,,,200704,5420476949,,,,,,,,,,,,,,,,,
 
 
-Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,,
+Rozmiar macierzy: 1120, Rozmiar bloku: 8, Liczba obliczanych macierzy: 1, Wersja kodu: 5,,,,,,,,,,,,,,,,,,,,,,,,,
 Name,Start Time(ns),Duration(ns),GridX,GridY,GridZ,BlockX,BlockY,BlockZ,Registers/Thread,Static Shared Memory,Dynamic Shared Memory,Size(bytes),Throughput(bytes/sec),gst request,gst total,gst 64B,gst 32B,local load,local store,gld 128B,gld 64B,gst uncoalesced,gst coalesced,gld total,gst 128B,gld 32B,gld request,gld coalesced,gld uncoalesced,warp serialize
 "Memcpy HtoD [async]",108801309,1040950,,,,,,,,,,5017600,4820212306,,,,,,,,,,,,,,,,,
 "Memcpy HtoD [async]",109843219,1213797,,,,,,,,,,5017600,4133804911,,,,,,,,,,,,,,,,,
