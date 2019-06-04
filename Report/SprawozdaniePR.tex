@@ -194,15 +194,9 @@ Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywan
 
 \begin{figure}
   \includegraphics[width=\linewidth]{images/2.jpg}
-  \caption{}
+  \caption{Wątek w ramach bloku wątków iteruje po wierszu bloku macierzy A i kolumnie bloku macierzy B obliczając część wartości pola macierzy C, która jest zapisywana w rejestrze.}
   \label{fig:matrix2}
 \end{figure}
-
-\textit{\textbf{rysunki z opisem określające:}}
-\textit{\begin{itemize}
-\item miejsce dostępu i kolejność dostępu do danych realizowane przez poszczególne wątki, bloki
-\item wyznaczane przez wątki i bloki wartości wyników
-\end{itemize}}
 
 \begin{listing}[H]
 \inputminted{cuda}{listings/invocation_sync.cu}
