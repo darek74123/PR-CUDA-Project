@@ -128,7 +128,7 @@ Maksymalny rozmiar bloku wątków & 512 \\
 
 Mnożenie macierzy jest procesem kosztownym obliczeniowo i przez to czasochłonnym. Jednym z rozwiązań mających na celu skrócenie czasu przetwarzania jest podział pracy oraz zrównoleglenie obliczeń. W przypadku obliczeń z wykorzystaniem karty graficznej, w przeciwieństwie do obliczeń na procesorze wielordzeniowym ogólnego przeznaczenia, efektywne przetwarzanie wymaga dostosowania algorytmu mnożenia tak, aby wykorzystywał bardzo dużą liczbę wątków.
 
-Mnożenie macierzy polega na obliczaniu jednej komórki macierzy wynikowej przez jeden wątek. Na pojedynczym multiprocesorze jednocześnie przetwarzane są wątki jednej wiązki. Wykonują one zawsze w danym momencie tę samą instrukcję, lecz na innych danych. Nie zawsze wątki są gotowe do obliczeń, np. w trakcie oczekiwania na dane. Wtedy sprzętowy moduł szeregujący wątki przełącza kontekst i następuje przetwarzanie gotowych wątków innej wiązki (z tego samego lub innego bloku wątków).
+W rozpatrywanych w zadaniu wersjach kodu mnożenie macierzy polega na obliczaniu jednej komórki macierzy wynikowej przez jeden wątek. Na pojedynczym multiprocesorze jednocześnie przetwarzane są wątki jednej wiązki. Wykonują one zawsze w danym momencie tę samą instrukcję, lecz na innych danych. Nie zawsze wątki są gotowe do obliczeń, np. w trakcie oczekiwania na dane. Wtedy sprzętowy moduł szeregujący wątki przełącza kontekst i następuje przetwarzanie gotowych wątków innej wiązki (z tego samego lub innego bloku wątków).
 
 W trakcie całego procesu mnożenia macierzy, wykorzystywanych jest $n^2$ wątków (n -- jeden wymiar macierzy kwadratowej). Wątki są pogrupowane w bloki, te natomiast składają się na strukturę zwaną gridem. Taka organizacja umożliwia z jednej strony efektywne szeregowanie obliczeń wykonywanych na karcie graficznej, z drugiej strony pozwala programiście kontrolować na rzecz jakich danych wątki wykonują instrukcje, poprzez wykorzystanie identyfikatorów bloków oraz wątków wewnątrz bloku, np. do indeksowania tablic.
 
@@ -165,29 +165,29 @@ Kod źródłowy przedstawiony na listingu \ref{lst:kernel} to funkcja -- kernel,
 Linie 20-23 służą deklaracji oraz pobraniu danych z pamięci globalnej do pamięci współdzielonej. Wątki w ramach połowy warpu odwołują się do sąsiednich komórek macierzy (wartości \verb|tx| są kolejnymi liczbami), co pozwala na efektywny, łączony dostęp do pamięci globalnej.
 
 W linii 24 ma miejsce synchronizacja wątków całego bloku. Gdyby w pamięci współdzielonej znajdował się tylko blok macierzy A, natomiast dane z macierzy B wątki odczytywałyby każdorazowo z pamięci globalnej, synchronizacja byłaby zbędna, ponieważ każda wiązka korzystałaby tylko z danych, które sama wcześniej pobrała. Wszystkie wątki wiązki wykonują w danym czasie tą samą instrukcję, kod nie zawiera żadnych rozgałęzień, a więc nie ma tutaj rozbieżności wątków. W przypadku omawianego kodu, w pamięci współdzielonej przechowywany jest także blok macierzy B.
-Wątki danej wiązki odczytują kolejne wartości iterując po kolumnie macierzy B, a zatem korzystają również z danych, które są wczytywane przez pozostałe wiązki. Skutkiem tego synchronizacja jest konieczna, ponieważ wszystkie wiązki muszą uzupełnić blok macierzy B, zanim którakolwiek będzie mogła rozpocząć obliczenia. Wymagana synchronizacja do pewnego stopnia ogranicza wydajność, ponieważ nie ma możliwości jednoczesnego pobierania danych i wykonywania obliczeń przez różne wiązki bloku. Możliwa jest natomiast realizacja przetwarzania innego bloku wątków, przydzielonego na dany multiprocesor, w trakcie oczekiwania na dane przez tamten blok. Liczba bloków przypadających na multiprocesor jest jednak ograniczona, przez co karta graficzna może nie wykonywać obliczeń przez $100\%$ czasu.
+Wątki danej wiązki odczytują kolejne wartości iterując po kolumnie tego bloku, a zatem korzystają również z danych, które są wczytywane przez pozostałe wiązki. Skutkiem tego synchronizacja jest konieczna, ponieważ wszystkie wiązki muszą uzupełnić blok macierzy B, zanim którakolwiek będzie mogła rozpocząć obliczenia. Wymagana synchronizacja do pewnego stopnia ogranicza wydajność, ponieważ nie ma możliwości jednoczesnego pobierania danych i wykonywania obliczeń przez różne wiązki bloku. Możliwa jest natomiast realizacja przetwarzania innego bloku wątków, przydzielonego na dany multiprocesor, w trakcie oczekiwania na dane przez tamten blok. Liczba bloków przypadających na multiprocesor jest jednak ograniczona, przez co karta graficzna może nie wykonywać obliczeń przez $100\%$ czasu.
 
 Następnie w linii 29 ma miejsce faktyczne mnożenie macierzy. Jeden wątek oblicza jeden wynik, wykorzystując wiersz bloku macierzy A oraz kolumnę bloku macierzy B. Dyrektywa \verb|#pragma unroll| powoduje rozwinięcie pętli, co pozwala wyeliminować narzut wydajnościowy, który wynikałby ze sprawdzania warunku oraz inkrementacji zmiennej sterującej.
 
 Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki należące do wiązek, które skończyły już obliczenia, nie mogły pobierać nowych danych do pamięci współdzielonej, w czasie kiedy inne wiązki jeszcze wykorzystują pobrany wcześniej fragment macierzy B do obliczeń.
 
-Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
+Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany do macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
 
 
-{\footnotesize Przyjęto oznaczenie BS -- rozmiar bloku, które będzie dalej wykorzystywane w opisie instancji i wnioskach, poniżej oznacza ono że rysunek dotyczy bloku a nie całej macierzy}
+{\footnotesize Przyjęto oznaczenie BS -- rozmiar bloku, które będzie dalej wykorzystywane w opisie instancji i wnioskach, poniżej oznacza ono, że rysunek dotyczy bloku a nie całej macierzy}
 \vspace{-0.3cm}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth, trim={0 50px 0 90px}, clip=true]{images/2.jpg}
+  \includegraphics[width=0.95\linewidth, trim={0 50px 0 90px}, clip=true]{images/2.jpg}
   \caption{Dane wykorzystywane przez jeden wątek w pętli wewnętrznej}
   \label{fig:matrix2}
 \end{figure}
-Pojedynczy wątek bloku iteruje po wierszu bloku macierzy A i kolumnie bloku macierzy B obliczając częściowy wynik przechowywany w rejestrze. Wartość jest zapisywana w rejestrze, i zostanie zapisana do pamięci globalnej po uzupełnieniu wyniku -- przejściu przez kolejne bloki macierzy). Trzeci rysunek pokazuje, który wynik jest wyznaczany.
+Pojedynczy wątek bloku iteruje po wierszu bloku macierzy A i kolumnie bloku macierzy B, obliczając częściowy wynik przechowywany w rejestrze. Wynik zostanie zapisany do pamięci globalnej po jego pełnym obliczeniu -- przejściu przez kolejne bloki macierzy). Trzeci rysunek pokazuje, który wynik jest wyznaczany na podstawie wskazanych danych.
 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\linewidth, trim={0 50px 0 90px}, clip=true]{images/1.jpg}
+  \includegraphics[width=0.95\linewidth, trim={0 50px 0 90px}, clip=true]{images/1.jpg}
   \caption{Dane wykorzystywane przez blok wątków}
   \label{fig:matrix1}
 \end{figure}
@@ -196,10 +196,14 @@ Jeden blok wątków wyznacza jeden blok macierzy wynikowej. W kolejnych iteracja
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.66\linewidth, trim={0 50px 0 0px}, clip=true]{images/3.jpg}
-  \caption{Wartości odczytywane przez pół warpu z pamięci współdzielonej: pole macierzy A i wiersz bloku macierzy B (ilustracja dla BS~=~16~x~16)}
+  \includegraphics[width=0.633\linewidth, trim={0 50px 0 20px}, clip=true]{images/3.jpg}
+  \caption{Wartości odczytywane przez pół warpu z pamięci współdzielonej (ilustracja dla BS~=~16~x~16)}
   \label{fig:matrix2}
 \end{figure}
+
+\vspace{-0.5cm}
+
+W jednej iteracji wątki pół-warpu odczytują tą samą komórkę bloku macierzy A (nie stanowi to problemu, konflikt w dostępie do banków występuje, gdy wątki czytają różne dane, znajdujące się w jednym banku), a następnie wiersz bloku macierzy B. 32 bitowe dane ułożone są w pamięci współdzielonej w kolejnych bankach, dzięki czemu konflikt również nie występuje.
 
 
 \subsection{Wywołanie kernela}
@@ -218,9 +222,11 @@ Listing 2 przedstawia wywołanie kernela dla wersji trzeciej kodu. Zmienna \verb
 \label{lst:async}
 \end{listing}
 
-Na listingu 3 przedstawiono wywołanie kernela dla piątej wersji kodu, w której obliczenia na karcie graficznej zrównoleglono z przesyłaniem danych pomiędzy pamięcią karty a pamięcią operacyjną. W tym celu w liniach 1-4 zadeklarowano oraz zainicjowano strumienie, w liczbie równej liczbie obliczanych macierzy. Pamięć na karcie graficznej tutaj również zaalokowano wcześniej za pomocą funkcji \verb|cudaMalloc|, jednak w odróżnieniu od poprzedniej wersji, macierze znajdujące się w pamięci operacyjnej zaalokowano z wykorzystaniem funkcji \verb|cudaMallocHost|. Funkcja ta pozwala na alokację pamięci z wyłączonym stronicowaniem, co jest wymagane w przypadku asynchronicznych transferów wykonywanych przez funkcję \verb|cudaMemcpyAsync|. Kolejne pętle służą zakolejkowaniu operacji kopiowania danych do pamięci karty, wywołań kernela oraz kopiowania wyników do pamięci operacyjnej. Warto wspomnieć o każdorazowym przypisaniu danej operacji do strumienia, oraz o tym, że funkcje te są nieblokujące, oznaczają tylko zlecenie pewnej operacji, która jest wykonywana w tle. W ramach jednego strumienia operacje są oczywiście wykonywane sekwencyjnie, co gwarantuje, że dane wykorzystywane przez dany kernel zostaną przesłane przed jego uruchomieniem, natomiast wyniki zostaną przesłane do pamięci operacyjnej dopiero, gdy przetwarzanie kernela się zakończy. Zysk wynikający ze zrównoleglenia transferu danych będzie zatem widoczny w przypadku, gdy wykorzystany zostanie więcej niż jeden strumień.
+Na listingu 3 przedstawiono wywołanie kernela dla piątej wersji kodu, w której obliczenia na karcie graficznej zrównoleglono z przesyłaniem danych pomiędzy pamięcią globalną karty a pamięcią operacyjną. W tym celu w liniach 1-4 zadeklarowano oraz zainicjowano strumienie, w liczbie równej liczbie obliczanych macierzy. Pamięć na karcie graficznej tutaj również zaalokowano wcześniej za pomocą funkcji \verb|cudaMalloc|, jednak w odróżnieniu od poprzedniej wersji, macierze znajdujące się w pamięci operacyjnej zaalokowano z wykorzystaniem funkcji \verb|cudaMallocHost|. Funkcja ta pozwala na alokację pamięci z wyłączonym stronicowaniem, co jest wymagane w przypadku asynchronicznych transferów wykonywanych przez funkcję \verb|cudaMemcpyAsync|.
 
-W odróżnieniu od poprzedniej wersji, wykorzystano tutaj oddzielne pętle, służące do kolejkowania transferu danych oraz wywołań kernela. Ma to na celu zakolejkowanie najpierw wszystkich operacji przesyłania danych do karty, następnie wszystkich wywołań kerneli i na końcu wszystkich operacji kopiowania wyników obliczeń. W przypadku wykorzystania jednej pętli, wymienione operacje byłyby kolejkowane na przemian. Kolejność kolejkowania ma ogromne znaczenie w przypadku pracy z kartami graficznymi ze starszych generacji. W przypadku wykorzystywanej karty graficznej, GTX 260, compute capability 1.3, jedna jednostka kopiująca dane, operacje powinny być kolejkowane tak jak przedstawiono na listingu 3. W przypadku wykorzystania jednej pętli, mechanizm kolejkujący karty graficznej nie byłby w stanie zrównoleglić operacji.
+Kolejne pętle służą zakolejkowaniu operacji kopiowania danych do pamięci karty, wywołań kernela oraz kopiowania wyników do pamięci operacyjnej. Warto wspomnieć o każdorazowym przypisaniu danej operacji do strumienia, oraz o tym, że funkcje te są nieblokujące, oznaczają tylko zlecenie pewnej operacji, która jest wykonywana w tle. W ramach jednego strumienia operacje są oczywiście wykonywane sekwencyjnie, co gwarantuje, że dane wykorzystywane przez dany kernel zostaną przesłane przed jego uruchomieniem, natomiast wyniki zostaną przesłane do pamięci operacyjnej dopiero, gdy przetwarzanie kernela się zakończy. Zysk wynikający ze zrównoleglenia transferu danych będzie zatem widoczny w przypadku, gdy wykorzystany zostanie więcej niż jeden strumień.
+
+W odróżnieniu od poprzedniej wersji, wykorzystano tutaj oddzielne pętle, służące do kolejkowania transferu danych oraz wywołań kernela. Ma to na celu zakolejkowanie najpierw wszystkich operacji przesyłania danych do karty, następnie wszystkich wywołań kerneli i na końcu wszystkich operacji kopiowania wyników obliczeń. W przypadku wykorzystania jednej pętli, wymienione operacje byłyby kolejkowane na przemian. Kolejność kolejkowania ma ogromne znaczenie w przypadku pracy z kartami graficznymi ze starszych generacji. W przypadku wykorzystywanej karty graficznej, GTX 260 (compute capability 1.3, jedna jednostka kopiująca dane), operacje powinny być kolejkowane tak jak przedstawiono na listingu 3. W przypadku wykorzystania jednej pętli, mechanizm kolejkujący karty graficznej nie byłby w stanie zrównoleglić operacji.
 
 \begin{figure}[H]
   \centering
@@ -236,9 +242,9 @@ W odróżnieniu od poprzedniej wersji, wykorzystano tutaj oddzielne pętle, słu
   \label{fig:async}
 \end{figure}
 
-Zupełnie inaczej sytuacja wygląda w przypadku kart graficznych z compute capability 2.0, kiedy dostępne są dwie jednostki kopiujące dane (jedna do pamięci globalnej karty, druga z pamięci karty graficznej do pamięci operacyjnej). W takim przypadku, oddzielne zakolejkowanie operacji w trzech pętlach umożliwiłoby jednoczesne kopiowanie danych do pamięci karty oraz wykonywanie obliczeń, jednak kopiowanie wyników następowałoby dopiero po skończeniu przetwarzania kernela ostatniego strumienia. Nie byłoby to optymalne, ponieważ druga jednostka kopiująca mogłaby kopiować dane strumienia, który zakończył już obliczenia w trakcie przetwarzania obliczeń następnego strumienia. Aby efektywnie wykorzystać możliwości takiej karty graficznej konieczne byłoby zastosowanie naprzemiennego kolejkowania operacji (jedna pętla).
+Zupełnie inaczej sytuacja wygląda w przypadku kart graficznych z compute capability 2.0, gdzie dostępne są dwie jednostki kopiujące dane (jedna do pamięci globalnej karty, druga z pamięci karty graficznej do pamięci operacyjnej). W takim przypadku, oddzielne zakolejkowanie operacji w trzech pętlach umożliwiłoby jednoczesne kopiowanie danych do pamięci karty oraz wykonywanie obliczeń, jednak kopiowanie wyników następowałoby dopiero po skończeniu przetwarzania kernela ostatniego strumienia. Nie byłoby to optymalne, ponieważ druga jednostka kopiująca mogłaby kopiować dane strumienia, który zakończył już obliczenia w trakcie przetwarzania obliczeń następnego strumienia. Aby efektywnie wykorzystać możliwości takiej karty graficznej konieczne byłoby zastosowanie naprzemiennego kolejkowania operacji (jedna pętla).
 
-Powyższe uwagi nie dotyczą nowszych kart graficznych, obsługujących co najmniej compute capability 3.5, w przypadku których kolejność zlecania operacji nie ma znaczenia, ponieważ system zarządzający potrafi uszeregować te operacje w optymalny sposób. Nowsze karty graficzne oferują także wiele innych usprawnień, m.in. zaawansowany mechanizm dostępu do pamięci globalnej, zmniejszający straty wydajności, w przypadkach gdzie dostęp do pamięci globalnej na kartach z compute capability nie mógł być łączony (z powodu nieodpowiedniego adresowania).
+Powyższe uwagi nie dotyczą nowszych kart graficznych, obsługujących co najmniej compute capability 3.5, w przypadku których kolejność zlecania operacji nie ma znaczenia, ponieważ system zarządzający potrafi uszeregować te operacje w optymalny sposób. Nowsze karty graficzne oferują także wiele innych usprawnień, m.in. zaawansowany mechanizm dostępu do pamięci globalnej, zmniejszający straty wydajności w przypadkach, gdzie dostęp do pamięci globalnej na starszych kartach z nie mógł być łączony (z powodu nieodpowiedniego adresowania).
 
 
 \section{Eksperyment pomiarowy}
@@ -292,9 +298,9 @@ Ponadto w celu obliczenia wartości miar \verb|gld efficiency| oraz \verb|gst ef
 
 \subsection{Wyniki eksperymentu}
 
-Dane zebrane podczas eksperymentu zostały dołączone do sprawozdania. Są to surowe dane z profilera, obliczone miary oraz zrzuty ekranu, które dobrze obrazują sposób przetwarzania i zyski z ukrycia kosztów transferu danych. Przyjęto następujące nazewnictwo zrzutów ekranu ,,N BS Wersja Lm'', przykładowo plik ,,1728 16 3 5.png'' oznacza instancję o rozmierze macierzy 1728~x~1728, rozmiarze bloku 16~x~16, wykorzystanie kodu w wersji 3 oraz obliczaniu 5 macierzy.
+Dane zebrane podczas eksperymentu zostały dołączone do sprawozdania. Są to surowe dane z profilera, obliczone miary oraz zrzuty ekranu, które dobrze obrazują sposób przetwarzania i zyski z ukrycia kosztów transferu danych. Przyjęto następujące nazewnictwo zrzutów ekranu ,,N BS Wersja Lm'', przykładowo plik ,,1728 16 3 5.png'' oznacza instancję o rozmiarze macierzy 1728~x~1728, rozmiarze bloku 16~x~16, wykorzystanie kodu w wersji 3 oraz obliczaniu 5 macierzy.
 
-Warto zwrócić uwagę na wskaźnik \verb|warp serialize| (dokładne wartości w załączonym arkuszu). Określa on liczbę wiązek, dla których dostęp do pamięci współdzielonej musiał odbywać się sekwencyjnie z powodu konfliktu w dostępie do banków pamięci. W przypadku omawianego kodu, konflikt nigdy nie powinien występować, zarówno w przypadku wykorzystania bloków 16~x~16 jaki i 8~x~8. Wartość tego wskaźnika jest jednak niezerowa w przypadku wszystkich instancji, gdzie BS~=~8~x~8. Trudno wyjaśnić co wpłynęło na taki wynik, być może wątki w przypadku instancji z tym rozmiarem bloku były szeregowane w inny sposób, przez co konflikty w dostępie były \texttt{możliwe}.
+Warto zwrócić uwagę na wskaźnik \verb|warp serialize| (dokładne wartości w załączonym arkuszu). Określa on liczbę wiązek, dla których dostęp do pamięci współdzielonej musiał odbywać się sekwencyjnie z powodu konfliktu w dostępie do banków pamięci. W przypadku omawianego kodu, konflikt nigdy nie powinien występować, zarówno w przypadku wykorzystania bloków 16~x~16 jaki i 8~x~8. Wartość tego wskaźnika jest jednak niezerowa w przypadku wszystkich instancji, gdzie BS~=~8~x~8. Trudno wyjaśnić co wpłynęło na taki wynik, być może wątki w przypadku instancji z tym rozmiarem bloku były szeregowane w inny sposób, przez co konflikty w dostępie były możliwe.
 
 \subsection{Wzory}
 
@@ -303,17 +309,23 @@ Prędkość przetwarzania
 PP = \frac{Z}{T} = \frac{2 \cdot n^3}{T} \; \in \; \mathbb{R}_+
 \end{equation}
 
+\vspace{0.5cm}
+
 Przyspieszenie przetwarzania wersji 5 kodu (ukrywanie kosztów transferu w czasie obliczeń) do wersji 3
 \begin{equation}
 P_{w5} = \frac{T_{w5}}{T_{w3}} \cdot 100\% \; \in \; \mathbb{R}_+
 \end{equation}
+
+\vspace{0.5cm}
 
 Przyspieszenie w stosunku do obliczeń sekwencyjnych na CPU metodą IKJ
 \begin{equation}
 P_{GPU} = \frac{T_{GPU}}{T_{CPU}} \cdot 100\% \; \in \; \mathbb{R}_+
 \end{equation}
 
-Sposób obliczenia zajętości multiprocesora został omówiony w punkcie 3.1, natomiast sposób wyznaczenia CGMA we wnioskach.
+\vspace{0.5cm}
+
+Sposób obliczenia zajętości multiprocesora został omówiony w punkcie 3.1, natomiast sposób wyznaczenia CGMA będzie omówiony we wnioskach.
 
 \subsection{Wyniki}
 
@@ -440,14 +452,14 @@ Zgodnie z wykresem \ref{chart:BS} wykorzystanie większego rozmiaru bloku przek�
 
 \subsubsection*{Wpływ wielkości pojedynczej macierzy}
 
-Analizując wykres \ref{chart:MatrixSize} trudno dostrzec wyraźną zależność skrócenia czasu od rozmiaru macierzy. Biorąc pod uwagę fakt, że koszt przesyłania danych stanowi większy procent czasu w przypadku mniejszych instancji (trzeba przesłać łącznie $3n^2$ danych, natomiast złożoność obliczeniowa wynosi $2n^3$, należy się spodziewać większych zysków w przypadku mniejszych macierzy. Wyniki dla instancji n~=~864 oraz n~=~1728 potwierdzają te przypuszczenia. Dwie pozostałe instancje nie potwierdzają tej tezy, jednak w tym przypadku wyniki są zaburzone przez fakt, że charakteryzowały się one różną zajętością multiprocesorów. Szczególny przypadek stanowi instancja n~=~224, gdzie obliczenia czasem trwały krócej niż przesyłanie danych (sytuację tą dobrze obrazują dołączone zrzuty ekranu). Powód wydłużenia czasu przetwarzania wersji 5 kodu dla instancji n~=~224, Lm~=~1 został omówiony wcześniej, przy okazji analizy wpływu obliczanych macierzy.
+Analizując wykres \ref{chart:MatrixSize} trudno dostrzec wyraźną zależność skrócenia czasu od rozmiaru macierzy. Biorąc pod uwagę fakt, że koszt przesyłania danych stanowi większy procent czasu w przypadku mniejszych instancji (trzeba przesłać łącznie $3n^2$ danych, natomiast złożoność obliczeniowa wynosi $2n^3$, należy się spodziewać większych zysków w przypadku mniejszych macierzy. Wyniki dla instancji n~=~864 oraz n~=~1728 potwierdzają te przypuszczenia. Dwie pozostałe instancje nie potwierdzają tej tezy, jednak w tym przypadku wyniki są zaburzone przez fakt, że charakteryzowały się one różną zajętością multiprocesorów. Szczególny przypadek stanowi instancja n~=~224, gdzie obliczenia czasem trwały krócej niż przesyłanie danych (sytuację tą dobrze obrazują dołączone zrzuty ekranu). Powód wydłużenia czasu przetwarzania wersji 5 kodu dla instancji n~=~224, Lm~=~1 został omówiony wcześniej, przy okazji analizy wpływu liczby obliczanych macierzy.
 
 
 \subsection{Przyspieszenie przetwarzania względem CPU}
 
-Wyniki zebrane w kolumnie $P_{GPU}$ tabeli \ref{table:all} pokazują, że mnożenie macierzy na karcie graficznej trwało krócej dla każdej testowanej instancji. Mnożenie macierzy jest świetnym przykładem problemu obliczeniowego, gdzie wykorzystanie karty graficznej, umożliwiającej współbieżne przetwarzanie bardzo dużej liczby wątków, przynosi znaczące zyski. Znaczące zyski czasowe przynosi optymalizacja algorytmu za pomocą takich technik jak wykorzystanie pamięci współdzielonej (dzięki lokalności czasowej dostępów do danych -- wielokrotne wykorzystanie danych raz pobranych z pamięci globalnej). Jeśli problem pozwala w łatwy sposób rozdzielić obliczenia na części składowe lub obliczenia polegają na przetwarzaniu wielu niezależnych danych, to warto również wykorzystać możliwość zrównoleglenia transferu danych z obliczeniami.
+Wyniki zebrane w kolumnie $P_{GPU}$ tabeli \ref{table:all} pokazują, że mnożenie macierzy na karcie graficznej trwało krócej dla każdej testowanej instancji. Mnożenie macierzy jest świetnym przykładem problemu obliczeniowego, gdzie wykorzystanie karty graficznej, umożliwiającej współbieżne przetwarzanie bardzo dużej liczby wątków, przynosi znaczące zyski. Dodatkowo zwiększoną efektywność przetwarzania można uzyskać dzięki optymalizacji algorytmu za pomocą takich technik jak wykorzystanie pamięci współdzielonej (dzięki lokalności czasowej dostępów do danych -- wielokrotne wykorzystanie danych raz pobranych z pamięci globalnej). Jeśli problem pozwala w łatwy sposób rozdzielić obliczenia na części składowe lub obliczenia polegają na przetwarzaniu wielu niezależnych danych, to warto również wykorzystać możliwość zrównoleglenia transferu danych z obliczeniami.
 
-Wartość miary przyspieszenia różni się dla poszczególnych instancji. Ogólna zależność jaką można zauważyć, to większe przyspieszenie w przypadku instancji w pełni wykorzystującej możliwości karty (pełne obciążenie wszystkich multiprocesorów) i mniejsze dla małych instancji oraz bloków o rozmiarze 8~x~8. Należy również zwrócić uwagę na to, że nie wszystkie instancje były przetwarzane na procesorze z tą samą prędkością.
+Wartość miary przyspieszenia różni się dla poszczególnych instancji. Ogólna zależność jaką można zauważyć, to większe przyspieszenie w przypadku instancji w pełni wykorzystujących możliwości karty (pełne obciążenie wszystkich multiprocesorów) i mniejsze dla małych instancji oraz bloków o rozmiarze 8~x~8. Należy również zwrócić uwagę na to, że nie wszystkie instancje były przetwarzane na procesorze z tą samą prędkością.
 
 
 \end{document}
