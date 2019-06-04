@@ -161,7 +161,7 @@ W realizowanym temacie zostało wykorzystane inne podejście -- wykorzystanie pa
 \end{listing}
 
 \newpage
-Kod źródłowy przedstawiony na listingu \ref{lst:kernel} to funkcja -- kernel, uruchamiany na karcie graficznej. Początkowe linie (4 - 13) służą wyznaczeniu przechowywanych w rejestrach wartości, wykorzystywanych dalej do indeksowania oraz sterowania pętlą. Następnie ma miejsce deklaracja tymczasowej zmiennej akumulującej obliczane iloczyny odpowiednich elementów macierzy. Pętla obejmujące linie 16 - 32 służy iteracji po kolejnych blokach macierzy A i B. Jeden blok wątków oblicza jeden blok macierzy wynikowej, jednak potrzebuje kolejno wszystkich bloków macierzy źródłowych, w celu wyznaczenia pełnego wyniku (analogicznie do zewnętrznych pętli metody 6-pętlowej dla CPU).
+Kod źródłowy przedstawiony na listingu \ref{lst:kernel} to funkcja -- kernel, uruchamiany na karcie graficznej. Początkowe linie (4 - 13) służą wyznaczeniu przechowywanych w rejestrach wartości, wykorzystywanych dalej do indeksowania oraz sterowania pętlą. Następnie ma miejsce deklaracja tymczasowej zmiennej akumulującej obliczane iloczyny odpowiednich elementów macierzy. Pętla obejmujące linie 16 - 32 służy iteracji po kolejnych blokach macierzy A i B. Jeden blok wątków oblicza jeden blok macierzy wynikowej, jednak potrzebuje całego wiersza bloków macierzy A i całej kolumny bloków macierzy B, w celu wyznaczenia pełnego wyniku (analogicznie do zewnętrznych pętli metody 6-pętlowej dla CPU).
 
 Linie 20-23 służą deklaracji oraz pobraniu danych z pamięci globalnej do pamięci współdzielonej. Wątki w ramach połowy warpu odwołują się do sąsiednich komórek macierzy (wartości \verb|tx| są kolejnymi liczbami), co pozwala na efektywny, łączony dostęp do pamięci globalnej.
 
@@ -175,26 +175,26 @@ Po wykonaniu obliczeń, konieczna jest również synchronizacja, aby wątki nale
 Ostatecznie w linii 34 wynik przechowywany w zmiennej tymczasowej jest zapisywany macierzy C w pamięci globalnej pod odpowiednim indeksem. Tutaj również wątki odwołują się do kolejnych adresów, zatem możliwe jest połączenie danych zapisywanych przez wątki z połowy warpu w jedną transakcję.\\
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{images/seq_version.jpg}
+  \includegraphics[width=\linewidth]{images/sync.png}
   \caption{Wersja sekwencyjna - kopiowanie na kartę graficzną, wykonywanie obliczeń i kopiowanie wyniku następują po sobie}
   \label{fig:seq}
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{images/async_version.jpg}
+  \includegraphics[width=\linewidth]{images/async.png}
   \caption{Wersja asynchroniczna - strumienie zaczynają przetwarzanie zaraz po przekopiowaniu swojej części danych}
   \label{fig:async}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{images/1.jpg}
-  \caption{TODO}
+  \caption{Jeden blok wątków wyznacza jednen blok macierzy wynikowej rozmiaru BS. W czasie obliczeń wykorzystuje wiersz bloków macierzy A i kolumnę bloków B.}
   \label{fig:matrix1}
 \end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{images/2.jpg}
-  \caption{TODO}
+  \caption{}
   \label{fig:matrix2}
 \end{figure}
 
